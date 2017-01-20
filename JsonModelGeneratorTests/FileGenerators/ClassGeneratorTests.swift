@@ -65,5 +65,17 @@ class ClassGeneratorTests: XCTestCase {
         
         XCTAssertEqual(expectedList, testString)
     }
+    
+    func testInitWithDictionaryWithPrimitiveTypes() {
+        let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
+            "        self.thing = dictionary?[\"thing\"] as? String\n" +
+            "        self.otherThing = dictionary?[\"otherThing\"] as? Int\n\n" +
+        "    }\n\n"
+        let propertyList = [ObjectProperty(name: "thing", type: "String"), ObjectProperty(name: "otherThing", type: "Int")]
+        
+        let testString = testObject.createInitWithDictionaryMethod(properties: propertyList)
+        
+        XCTAssertEqual(expectedString, testString)
+    }
 
 }

@@ -51,6 +51,36 @@ class ClassGenerator {
         return initMethod
     }
     
+    func createInitWithDictionaryMethod(properties:[ObjectProperty]) -> String {
+        var initMethod = "    public init?(dictionary:[String: Any?]?) {\n"
+        initMethod += "\n"
+        for property in properties {
+//            if property.isCustomType {
+//                if property.isArray {
+//                    initMethod += "        if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
+//                    initMethod += "            var objectArray = [\(property.arrayType)]()\n"
+//                    initMethod += "            for dict in dictArray {\n"
+//                    initMethod += "                if let obj = \(property.arrayType)(dict:dict){\n"
+//                    initMethod += "                    objectArray.append(obj)\n"
+//                    initMethod += "                }\n"
+//                    initMethod += "            }\n"
+//                    initMethod += "            \(property.name) = objectArray\n"
+//                    initMethod += "        } else {\n"
+//                    initMethod += "            \(property.name) = nil\n"
+//                    initMethod += "        }\n"
+//                    
+//                } else {
+//                    initMethod += "        \(property.name) = \(property.type)(dict:(dict?[\"\(property.name)\"] as? [String:Any?]))\n"
+//                }
+//            } else {
+                initMethod += "        self.\(property.name) = dictionary?[\"\(property.name)\"] as? \(property.type)\n"
+//            }
+        }
+        initMethod += "\n"
+        initMethod += "    }\n\n"
+        return initMethod
+    }
+    
 
 
 }
