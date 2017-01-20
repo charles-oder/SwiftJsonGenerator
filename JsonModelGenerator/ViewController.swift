@@ -233,20 +233,10 @@ class ViewController: NSViewController {
             return buildModelFile(dict: dict, location: location, prefix: prefix, className: key.capitalized, suffix: suffix)
         }
         if let dictArray = val as? [[String: Any?]] {
-            let type = buildModelFile(dict: mergeDictArray(array: dictArray), location: location, prefix: prefix, className: key.capitalized, suffix: suffix)
+            let type = buildModelFile(dict: dictArray.mergedArray, location: location, prefix: prefix, className: key.capitalized, suffix: suffix)
             return "[\(type)]"
         }
         return "Any"
-    }
-    
-    func mergeDictArray(array: [[String:Any?]]) -> [String: Any?] {
-        var output = [String: Any?]()
-        for dict in array {
-            for (key, val) in dict {
-                output[key] = val
-            }
-        }
-        return output
     }
     
     func showError(title: String, message: String) {

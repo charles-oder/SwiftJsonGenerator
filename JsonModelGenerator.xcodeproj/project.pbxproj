@@ -10,6 +10,8 @@
 		E114C8F51E31AFBE00C172EB /* ObjectProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8F41E31AFBE00C172EB /* ObjectProperty.swift */; };
 		E114C8F71E31B67100C172EB /* Double+IntCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8F61E31B67100C172EB /* Double+IntCheck.swift */; };
 		E114C8F91E31B6A500C172EB /* Double+IntCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8F81E31B6A500C172EB /* Double+IntCheckTests.swift */; };
+		E114C8FB1E31BA3300C172EB /* Array+JsonDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8FA1E31BA3300C172EB /* Array+JsonDictionary.swift */; };
+		E114C8FD1E31BA3F00C172EB /* Array+JsonDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8FC1E31BA3F00C172EB /* Array+JsonDictionaryTests.swift */; };
 		E1E09D841E314365002A3092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D831E314365002A3092 /* AppDelegate.swift */; };
 		E1E09D861E314365002A3092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D851E314365002A3092 /* ViewController.swift */; };
 		E1E09D881E314365002A3092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1E09D871E314365002A3092 /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 		E114C8F41E31AFBE00C172EB /* ObjectProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectProperty.swift; sourceTree = "<group>"; };
 		E114C8F61E31B67100C172EB /* Double+IntCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+IntCheck.swift"; sourceTree = "<group>"; };
 		E114C8F81E31B6A500C172EB /* Double+IntCheckTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+IntCheckTests.swift"; sourceTree = "<group>"; };
+		E114C8FA1E31BA3300C172EB /* Array+JsonDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+JsonDictionary.swift"; sourceTree = "<group>"; };
+		E114C8FC1E31BA3F00C172EB /* Array+JsonDictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+JsonDictionaryTests.swift"; sourceTree = "<group>"; };
 		E1E09D801E314365002A3092 /* JsonModelGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonModelGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E09D831E314365002A3092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1E09D851E314365002A3092 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 				E1E09D8C1E314365002A3092 /* Info.plist */,
 				E114C8F41E31AFBE00C172EB /* ObjectProperty.swift */,
 				E114C8F61E31B67100C172EB /* Double+IntCheck.swift */,
+				E114C8FA1E31BA3300C172EB /* Array+JsonDictionary.swift */,
 			);
 			path = JsonModelGenerator;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 				E1E09D951E314365002A3092 /* ObjectPropertyTests.swift */,
 				E1E09D971E314365002A3092 /* Info.plist */,
 				E114C8F81E31B6A500C172EB /* Double+IntCheckTests.swift */,
+				E114C8FC1E31BA3F00C172EB /* Array+JsonDictionaryTests.swift */,
 			);
 			path = JsonModelGeneratorTests;
 			sourceTree = "<group>";
@@ -209,6 +215,7 @@
 				E1E09D861E314365002A3092 /* ViewController.swift in Sources */,
 				E1E09D841E314365002A3092 /* AppDelegate.swift in Sources */,
 				E114C8F71E31B67100C172EB /* Double+IntCheck.swift in Sources */,
+				E114C8FB1E31BA3300C172EB /* Array+JsonDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +225,7 @@
 			files = (
 				E1E09D961E314365002A3092 /* ObjectPropertyTests.swift in Sources */,
 				E114C8F91E31B6A500C172EB /* Double+IntCheckTests.swift in Sources */,
+				E114C8FD1E31BA3F00C172EB /* Array+JsonDictionaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
