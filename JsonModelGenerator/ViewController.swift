@@ -85,7 +85,9 @@ class ViewController: NSViewController {
     }
     
     func buildSupportFile(location: String) {
-        let fileContents = "import Foundation\n" +
+        let fileContents = "// JsonExtensions.swift\n" +
+            "// Generated \(Date().description)\n" +
+            "import Foundation\n" +
             "\n" +
             "public protocol JsonModel {\n" +
             "    init?(dict:[String: Any?]?)\n" +
