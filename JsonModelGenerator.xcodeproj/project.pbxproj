@@ -16,6 +16,9 @@
 		E114C9201E324DA500C172EB /* JsonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C91F1E324DA500C172EB /* JsonExtensions.swift */; };
 		E114C9231E324E0200C172EB /* JsonExtensionsGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C9221E324E0200C172EB /* JsonExtensionsGeneratorTests.swift */; };
 		E114C9251E3250DA00C172EB /* JsonExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C9241E3250DA00C172EB /* JsonExtensionsTests.swift */; };
+		E189BB701E326028003E2017 /* ClassGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB6F1E326028003E2017 /* ClassGenerator.swift */; };
+		E189BB721E32606C003E2017 /* ClassGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB711E32606C003E2017 /* ClassGeneratorTests.swift */; };
+		E189BB741E32641B003E2017 /* TestFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB731E32641B003E2017 /* TestFileManager.swift */; };
 		E1E09D841E314365002A3092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D831E314365002A3092 /* AppDelegate.swift */; };
 		E1E09D861E314365002A3092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D851E314365002A3092 /* ViewController.swift */; };
 		E1E09D881E314365002A3092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1E09D871E314365002A3092 /* Assets.xcassets */; };
@@ -43,6 +46,9 @@
 		E114C91F1E324DA500C172EB /* JsonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonExtensions.swift; sourceTree = "<group>"; };
 		E114C9221E324E0200C172EB /* JsonExtensionsGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonExtensionsGeneratorTests.swift; sourceTree = "<group>"; };
 		E114C9241E3250DA00C172EB /* JsonExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonExtensionsTests.swift; sourceTree = "<group>"; };
+		E189BB6F1E326028003E2017 /* ClassGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassGenerator.swift; sourceTree = "<group>"; };
+		E189BB711E32606C003E2017 /* ClassGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassGeneratorTests.swift; sourceTree = "<group>"; };
+		E189BB731E32641B003E2017 /* TestFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFileManager.swift; sourceTree = "<group>"; };
 		E1E09D801E314365002A3092 /* JsonModelGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonModelGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E09D831E314365002A3092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1E09D851E314365002A3092 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +83,7 @@
 			children = (
 				E114C91F1E324DA500C172EB /* JsonExtensions.swift */,
 				E114C91B1E31BE4000C172EB /* JsonExtensionsGenerator.swift */,
+				E189BB6F1E326028003E2017 /* ClassGenerator.swift */,
 			);
 			path = FileGenerators;
 			sourceTree = "<group>";
@@ -86,6 +93,7 @@
 			children = (
 				E114C9221E324E0200C172EB /* JsonExtensionsGeneratorTests.swift */,
 				E114C9241E3250DA00C172EB /* JsonExtensionsTests.swift */,
+				E189BB711E32606C003E2017 /* ClassGeneratorTests.swift */,
 			);
 			path = FileGenerators;
 			sourceTree = "<group>";
@@ -132,6 +140,7 @@
 				E1E09D971E314365002A3092 /* Info.plist */,
 				E114C8F81E31B6A500C172EB /* Double+IntCheckTests.swift */,
 				E114C8FC1E31BA3F00C172EB /* Array+JsonDictionaryTests.swift */,
+				E189BB731E32641B003E2017 /* TestFileManager.swift */,
 			);
 			path = JsonModelGeneratorTests;
 			sourceTree = "<group>";
@@ -243,6 +252,7 @@
 				E114C8F51E31AFBE00C172EB /* ObjectProperty.swift in Sources */,
 				E1E09D861E314365002A3092 /* ViewController.swift in Sources */,
 				E1E09D841E314365002A3092 /* AppDelegate.swift in Sources */,
+				E189BB701E326028003E2017 /* ClassGenerator.swift in Sources */,
 				E114C8F71E31B67100C172EB /* Double+IntCheck.swift in Sources */,
 				E114C8FB1E31BA3300C172EB /* Array+JsonDictionary.swift in Sources */,
 				E114C91C1E31BE4000C172EB /* JsonExtensionsGenerator.swift in Sources */,
@@ -253,6 +263,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E189BB741E32641B003E2017 /* TestFileManager.swift in Sources */,
+				E189BB721E32606C003E2017 /* ClassGeneratorTests.swift in Sources */,
 				E1E09D961E314365002A3092 /* ObjectPropertyTests.swift in Sources */,
 				E114C9231E324E0200C172EB /* JsonExtensionsGeneratorTests.swift in Sources */,
 				E114C9251E3250DA00C172EB /* JsonExtensionsTests.swift in Sources */,

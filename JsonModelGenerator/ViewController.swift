@@ -85,7 +85,9 @@ class ViewController: NSViewController {
         let fileName = className + ".swift"
         let url = URL(fileURLWithPath: location + fileName)
         
-        var fileContents = createHeaders(fileName: fileName)
+        let classGenerator = ClassGenerator(fileLocation: location)
+        
+        var fileContents = classGenerator.createHeaders(className: className)
         fileContents += createClassDeclaration(className: className)
         fileContents += createPropertyList(properties: properties)
         fileContents += createInitWithPropertyArgs(properties: properties)
@@ -99,14 +101,6 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Could not write file: \(location)")
             
         }
-    }
-    
-    func createHeaders(fileName: String) -> String {
-        var header = "// \(fileName)\n"
-        header += "// Generated \(Date().description)\n\n"
-        
-        header += "import Foundation\n\n"
-        return header
     }
     
     func createClassDeclaration(className: String) -> String {
