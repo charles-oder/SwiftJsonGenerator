@@ -77,5 +77,17 @@ class ClassGeneratorTests: XCTestCase {
         
         XCTAssertEqual(expectedString, testString)
     }
-
+    
+    func testInitWithDictionaryWithCustomTypes() {
+        let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
+            "        self.thing = Monkey(dictionary:dictionary?[\"thing\"] as? [String:Any?])\n" +
+            "        self.otherThing = Banana(dictionary:dictionary?[\"otherThing\"] as? [String:Any?])\n\n" +
+        "    }\n\n"
+        let propertyList = [ObjectProperty(name: "thing", type: "Monkey"), ObjectProperty(name: "otherThing", type: "Banana")]
+        
+        let testString = testObject.createInitWithDictionaryMethod(properties: propertyList)
+        
+        XCTAssertEqual(expectedString, testString)
+    }
+    
 }

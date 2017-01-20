@@ -55,7 +55,7 @@ class ClassGenerator {
         var initMethod = "    public init?(dictionary:[String: Any?]?) {\n"
         initMethod += "\n"
         for property in properties {
-//            if property.isCustomType {
+            if property.isCustomType {
 //                if property.isArray {
 //                    initMethod += "        if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
 //                    initMethod += "            var objectArray = [\(property.arrayType)]()\n"
@@ -70,11 +70,11 @@ class ClassGenerator {
 //                    initMethod += "        }\n"
 //                    
 //                } else {
-//                    initMethod += "        \(property.name) = \(property.type)(dict:(dict?[\"\(property.name)\"] as? [String:Any?]))\n"
+                    initMethod += "        self.\(property.name) = \(property.type)(dictionary:dictionary?[\"\(property.name)\"] as? [String:Any?])\n"
 //                }
-//            } else {
+            } else {
                 initMethod += "        self.\(property.name) = dictionary?[\"\(property.name)\"] as? \(property.type)\n"
-//            }
+            }
         }
         initMethod += "\n"
         initMethod += "    }\n\n"
