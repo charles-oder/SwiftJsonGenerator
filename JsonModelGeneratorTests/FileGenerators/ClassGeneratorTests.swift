@@ -33,5 +33,13 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertTrue(testString.hasSuffix(expectedSuffix))
         
     }
+    
+    func testClassDeclaration() {
+        let expectedClassDeclaration = "public struct TestFile: JsonModel {\n\n"
+        
+        let testString = testObject.createClassDeclaration(className: "TestFile")
+        
+        XCTAssertEqual(expectedClassDeclaration, testString)
+    }
 
 }

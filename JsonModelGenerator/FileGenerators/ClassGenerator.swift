@@ -25,5 +25,8 @@ class ClassGenerator {
         return header
     }
     
+    func createClassDeclaration(className: String) -> String {
+        return "public struct \(className): JsonModel {\n\n"
+    }
 
 }

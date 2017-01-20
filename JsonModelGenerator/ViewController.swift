@@ -88,7 +88,7 @@ class ViewController: NSViewController {
         let classGenerator = ClassGenerator(fileLocation: location)
         
         var fileContents = classGenerator.createHeaders(className: className)
-        fileContents += createClassDeclaration(className: className)
+        fileContents += classGenerator.createClassDeclaration(className: className)
         fileContents += createPropertyList(properties: properties)
         fileContents += createInitWithPropertyArgs(properties: properties)
         fileContents += createInitWithDictionaryMethod(properties: properties)
@@ -101,10 +101,6 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Could not write file: \(location)")
             
         }
-    }
-    
-    func createClassDeclaration(className: String) -> String {
-        return "public struct \(className): JsonModel {\n\n"
     }
     
     func createPropertyList(properties:[ObjectProperty]) -> String {
