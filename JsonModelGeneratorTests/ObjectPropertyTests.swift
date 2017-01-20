@@ -83,5 +83,17 @@ class ObjectPropertyTests: XCTestCase {
         XCTAssertTrue(testObject.isArray)
     }
     
+    func testArrayTypeForStringArray() {
+        let testObject = ObjectProperty(name: "thing", type: "[String]")
+        
+        XCTAssertEqual("String", testObject.arrayType)
+    }
+    
+    func testArrayTypeForCustomArray() {
+        let testObject = ObjectProperty(name: "thing", type: "[Monkey]")
+        
+        XCTAssertEqual("Monkey", testObject.arrayType)
+    }
+    
     
 }

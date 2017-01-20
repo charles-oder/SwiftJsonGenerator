@@ -23,4 +23,8 @@ extension ObjectProperty {
         return type.hasPrefix("[") && type.hasSuffix("]")
     }
     
+    var arrayType: String {
+        return type.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
+    }
+    
 }
