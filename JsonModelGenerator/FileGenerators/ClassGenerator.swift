@@ -113,5 +113,20 @@ class ClassGenerator {
     func createFooter() -> String {
         return "}\n"
     }
+    
+    func createFile(className: String, properties:[ObjectProperty]) throws {
+        let fileName = className + ".swift"
+        let url = URL(fileURLWithPath: fileLocation + fileName)
+        
+        let fileContents = createHeaders(className: className) +
+            createClassDeclaration(className: className) +
+            createPropertyList(properties: properties) +
+            createInitWithPropertyArgs(properties: properties) +
+            createInitWithDictionaryMethod(properties: properties) +
+            createJsonDictionaryDefinition(properties: properties) +
+            createFooter()
+        
+        try fileContents.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
+    }
 
 }

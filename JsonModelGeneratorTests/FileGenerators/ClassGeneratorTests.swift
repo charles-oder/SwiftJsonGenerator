@@ -166,4 +166,57 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertEqual(expectedFooter, testString)
     }
     
+    func testCreateClassFile() {
+        let expectedPrefix = "// TestModel.swift\n" +
+        "// Created by SwiftJsonGenerator https://github.com/charles-oder/SwiftJsonGenerator\n" +
+        "// Generated "
+        let expectedSuffix = "\n" +
+        "import Foundation\n" +
+        "\n" +
+        "public struct TestModel: JsonModel {\n" +
+        "\n" +
+        "    public let thing: String?\n" +
+        "\n" +
+        "    public init(\n" +
+        "                thing: String?\n" +
+        "                ) {\n" +
+        "        self.thing = thing\n" +
+        "    }\n" +
+        "\n" +
+        "    public init?(dictionary:[String: Any?]?) {\n" +
+        "\n" +
+        "        self.thing = dictionary?[\"thing\"] as? String\n" +
+        "\n" +
+        "    }\n" +
+        "\n" +
+        "    public var jsonDictionary: [String:Any?] {\n" +
+        "\n" +
+        "        var dictionary = [String: Any?]()\n" +
+        "        dictionary[\"thing\"] = self.thing\n" +
+        "\n" +
+        "        return dictionary\n" +
+        "\n" +
+        "    }\n" +
+        "\n" +
+        "}\n"
+        
+        let propertyList = [ObjectProperty(name: "thing", type: "String")]
+        
+        do {
+            try testObject.createFile(className: "TestModel", properties: propertyList)
+        } catch {
+            XCTFail("Failed to create file")
+        }
+        
+        var testFile: String?
+        do {
+            testFile = try String(contentsOf: URL(fileURLWithPath: "/tmp/TestModel.swift"))
+        } catch {
+            XCTFail("Test file not found")
+        }
+        
+        XCTAssertTrue(testFile?.hasPrefix(expectedPrefix) == true)
+        XCTAssertTrue(testFile?.hasSuffix(expectedSuffix) == true)
+    }
+    
 }

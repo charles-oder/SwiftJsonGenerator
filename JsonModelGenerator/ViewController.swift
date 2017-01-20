@@ -75,32 +75,14 @@ class ViewController: NSViewController {
             let type = getType(key: key, val: val, location: location, prefix: prefix, suffix: suffix)
             properties.append(ObjectProperty(name: key, type: type))
         }
-        createFile(location: location, className: className, properties: properties)
+        do {
+            try ClassGenerator(fileLocation: location).createFile(className: className, properties: properties)
+        } catch {
+            showError(title: "Error", message: "Could not write file: \(location)")
+        }
         
         return className
         
-    }
-    
-    func createFile(location: String, className: String, properties:[ObjectProperty]) {
-        let fileName = className + ".swift"
-        let url = URL(fileURLWithPath: location + fileName)
-        
-        let classGenerator = ClassGenerator(fileLocation: location)
-        
-        var fileContents = classGenerator.createHeaders(className: className)
-        fileContents += classGenerator.createClassDeclaration(className: className)
-        fileContents += classGenerator.createPropertyList(properties: properties)
-        fileContents += classGenerator.createInitWithPropertyArgs(properties: properties)
-        fileContents += classGenerator.createInitWithDictionaryMethod(properties: properties)
-        fileContents += classGenerator.createJsonDictionaryDefinition(properties: properties)
-        fileContents += classGenerator.createFooter()
-        
-        do {
-            try fileContents.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
-        } catch {
-            showError(title: "Error", message: "Could not write file: \(location)")
-            
-        }
     }
     
     func getType(key: String, val: Any?, location: String, prefix: String, suffix: String) -> String {
