@@ -81,6 +81,33 @@ class ClassGenerator {
         return initMethod
     }
     
-
+    func createJsonDictionaryDefinition(properties:[ObjectProperty]) -> String {
+        var output = "    public var jsonDictionary: [String:Any?] {\n"
+        output += "\n"
+        output += "        var dictionary = [String: Any?]()\n"
+        for property in properties {
+            if property.isCustomType {
+                if property.isArray {
+                    output += "        if let objectArray = self.\(property.name) {\n"
+                    output += "            var dictionaryArray = [[String: Any?]]()\n"
+                    output += "            for object in objectArray {\n"
+                    output += "                dictionaryArray.append(object.jsonDictionary)\n"
+                    output += "            }\n"
+                    output += "            dictionary[\"\(property.name)\"] = dictionaryArray\n"
+                    output += "        }\n"
+                    
+                } else {
+                    output += "        dictionary[\"\(property.name)\"] = self.\(property.name)?.jsonDictionary\n"
+                }
+            } else {
+                output += "        dictionary[\"\(property.name)\"] = self.\(property.name)\n"
+            }
+            
+        }
+        output += "\n"
+        output += "        return dictionary\n\n"
+        output += "    }\n\n"
+        return output
+    }
 
 }

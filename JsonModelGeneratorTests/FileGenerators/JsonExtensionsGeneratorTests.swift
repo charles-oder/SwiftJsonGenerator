@@ -22,7 +22,7 @@ class JsonExtensionsGeneratorTests: XCTestCase {
         }
     }
     
-    func testExample() {
+    func testCreateJsonExtensionFile() {
         let testObject = JsonExtensionsGenerator(fileLocation: testLocation)
         do {
             try testObject.buildSupportFile()

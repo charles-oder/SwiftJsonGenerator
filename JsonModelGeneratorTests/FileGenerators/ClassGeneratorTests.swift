@@ -111,6 +111,53 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertEqual(expectedString, testString)
     }
     
+    func testJsonDictionaryPropertyWithPrimitiveTypes() {
+        let expectedString =  "    public var jsonDictionary: [String:Any?] {\n\n" +
+            "        var dictionary = [String: Any?]()\n" +
+            "        dictionary[\"thing\"] = self.thing\n" +
+            "        dictionary[\"otherThing\"] = self.otherThing\n\n" +
+            "        return dictionary\n\n" +
+        "    }\n\n"
+        let propertyList = [ObjectProperty(name: "thing", type: "String"), ObjectProperty(name: "otherThing", type: "Int")]
+        
+        let testString = testObject.createJsonDictionaryDefinition(properties: propertyList)
+        
+        XCTAssertEqual(expectedString, testString)
+    }
+    
+    func testJsonDictionaryPropertyWithCustomTypes() {
+        let expectedString =  "    public var jsonDictionary: [String:Any?] {\n\n" +
+            "        var dictionary = [String: Any?]()\n" +
+            "        dictionary[\"thing\"] = self.thing?.jsonDictionary\n" +
+            "        dictionary[\"otherThing\"] = self.otherThing?.jsonDictionary\n\n" +
+            "        return dictionary\n\n" +
+        "    }\n\n"
+        let propertyList = [ObjectProperty(name: "thing", type: "Monkey"), ObjectProperty(name: "otherThing", type: "Banana")]
+        
+        let testString = testObject.createJsonDictionaryDefinition(properties: propertyList)
+        
+        XCTAssertEqual(expectedString, testString)
+    }
+    
+    func testJsonDictionaryPropertyWithCustomTypeArray() {
+        let expectedString =  "    public var jsonDictionary: [String:Any?] {\n\n" +
+            "        var dictionary = [String: Any?]()\n" +
+            "        if let objectArray = self.thing {\n" +
+            "            var dictionaryArray = [[String: Any?]]()\n" +
+            "            for object in objectArray {\n" +
+            "                dictionaryArray.append(object.jsonDictionary)\n" +
+            "            }\n" +
+            "            dictionary[\"thing\"] = dictionaryArray\n" +
+            "        }\n\n" +
+            "        return dictionary\n\n" +
+        "    }\n\n"
+        let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]
+        
+        let testString = testObject.createJsonDictionaryDefinition(properties: propertyList)
+        
+        XCTAssertEqual(expectedString, testString)
+    }
+    
     
     
 }

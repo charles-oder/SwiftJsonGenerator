@@ -91,8 +91,8 @@ class ViewController: NSViewController {
         fileContents += classGenerator.createClassDeclaration(className: className)
         fileContents += classGenerator.createPropertyList(properties: properties)
         fileContents += classGenerator.createInitWithPropertyArgs(properties: properties)
-        fileContents += createInitWithDictionaryMethod(properties: properties)
-        fileContents += createJsonDictionaryDefinition(properties: properties)
+        fileContents += classGenerator.createInitWithDictionaryMethod(properties: properties)
+        fileContents += classGenerator.createJsonDictionaryDefinition(properties: properties)
         fileContents += createFooter()
         
         do {
@@ -101,65 +101,6 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Could not write file: \(location)")
             
         }
-    }
-    
-    func createInitWithDictionaryMethod(properties:[ObjectProperty]) -> String {
-        var initMethod = "    public init?(dict:[String: Any?]?) {\n"
-        initMethod += "\n"
-        for property in properties {
-            if property.isCustomType {
-                if property.isArray {
-                    initMethod += "        if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
-                    initMethod += "            var objectArray = [\(property.arrayType)]()\n"
-                    initMethod += "            for dict in dictArray {\n"
-                    initMethod += "                if let obj = \(property.arrayType)(dict:dict){\n"
-                    initMethod += "                    objectArray.append(obj)\n"
-                    initMethod += "                }\n"
-                    initMethod += "            }\n"
-                    initMethod += "            \(property.name) = objectArray\n"
-                    initMethod += "        } else {\n"
-                    initMethod += "            \(property.name) = nil\n"
-                    initMethod += "        }\n"
-                    
-                } else {
-                    initMethod += "        \(property.name) = \(property.type)(dict:(dict?[\"\(property.name)\"] as? [String:Any?]))\n"
-                }
-            } else {
-                initMethod += "        \(property.name) = dict?[\"\(property.name)\"] as? \(property.type)\n"
-            }
-        }
-        initMethod += "\n"
-        initMethod += "    }\n\n"
-        return initMethod
-    }
-    
-    func createJsonDictionaryDefinition(properties:[ObjectProperty]) -> String {
-        var output = "    public var jsonDictionary: [String: Any?] {\n"
-        output += "\n"
-        output += "        var dict = [String: Any?]()\n"
-        for property in properties {
-            if property.isCustomType {
-                if property.isArray {
-                    output += "        if let objArray = \(property.name) {\n"
-                    output += "            var dictArray = [[String: Any?]]()\n"
-                    output += "            for obj in objArray {\n"
-                    output += "                dictArray.append(obj.jsonDictionary)\n"
-                    output += "            }\n"
-                    output += "            dict[\"\(property.name)\"] = dictArray\n"
-                    output += "        }\n"
-                    
-                } else {
-                    output += "        dict[\"\(property.name)\"] = \(property.name)?.jsonDictionary\n"
-                }
-            } else {
-                output += "        dict[\"\(property.name)\"] = \(property.name)\n"
-            }
-            
-        }
-        output += "\n"
-        output += "        return dict\n"
-        output += "    }\n\n"
-        return output
     }
     
     func createFooter() -> String {
