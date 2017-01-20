@@ -18,29 +18,6 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         jsonTextView.isAutomaticQuoteSubstitutionEnabled = false
-        directoryField.stringValue = "/Users/charlesoder/Documents/"
-        jsonTextView.string = "{" +
-        "\"aString\":\"sadfasf\"," +
-        "\"aDouble\":1.11," +
-        "\"anInt\":1," +
-        "\"aBool\":true," +
-        "\"aStringArray\":[\"one\", \"two\"]," +
-        "\"aDoubleArray\":[1.2, 2.3, 3.4]," +
-        "\"anIntArray\":[1,2,3,4]," +
-        "\"aboolArray\":[true, false, true]," +
-            "\"thing\":{\"one\":\"two\"}" +
-    "}"
-        
-        do {
-            let url = URL(fileURLWithPath: "/Users/charlesoder/Documents/LargeComplexFIle.json")
-            let data = try Data(contentsOf: url)
-            let json = String(data: data, encoding: .utf8)
-            let obj = BaseClassModel(json: json!)
-            let newJson = obj?.jsonString ?? "Nil"
-            try newJson.data(using: .utf8, allowLossyConversion: true)?.write(to: URL(fileURLWithPath:"/Users/charlesoder/Documents/Output.json"))
-        } catch {}
-        
-        // Do any additional setup after loading the view.
     }
 
     override var representedObject: Any? {
@@ -86,6 +63,7 @@ class ViewController: NSViewController {
     
     func buildSupportFile(location: String) {
         let fileContents = "// JsonExtensions.swift\n" +
+            "// Do not add multiple copies of this generated file to your project\n" +
             "// Generated \(Date().description)\n" +
             "import Foundation\n" +
             "\n" +
