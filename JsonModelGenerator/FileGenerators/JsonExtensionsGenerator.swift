@@ -29,11 +29,11 @@ class JsonExtensionsGenerator {
             "}\n" +
             "\n" +
             "public extension JsonModel {\n" +
-            "    init?(json: String) {\n" +
+            "    public init?(json: String) {\n" +
             "        self.init(dict:json.jsonDict)\n" +
             "    }\n" +
             "\n" +
-            "    func serializeDictionary(dict: [String:Any?]) -> String? {\n" +
+            "    public func serializeDictionary(dict: [String:Any?]) -> String? {\n" +
             "        do {\n" +
             "            let x = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions(rawValue: 0))\n" +
             "            return String(data: x, encoding: .utf8)\n" +
@@ -42,7 +42,7 @@ class JsonExtensionsGenerator {
             "        }\n" +
             "    }\n" +
             "    \n" +
-            "    var jsonString: String? {\n" +
+            "    public var jsonString: String? {\n" +
             "        return serializeDictionary(dict: jsonDictionary)\n" +
             "    }\n" +
             "\n" +
