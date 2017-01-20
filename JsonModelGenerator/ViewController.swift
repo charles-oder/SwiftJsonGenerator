@@ -47,7 +47,7 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Please enter valid JSON.")
             return
         }
-        let classGenerator = ClassGenerator(fileLocation: directoryField.stringValue)
+        let classGenerator = ClassGenerator(fileLocation: directoryField.stringValue, prefix: prefixField.stringValue, suffix: suffixField.stringValue)
         var dict: [String: Any?]?
         do {
             dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any?]
@@ -57,7 +57,7 @@ class ViewController: NSViewController {
         }
         
         do {
-            try classGenerator.buildModelFile(dict: dict!, prefix: prefixField.stringValue, className: baseClassNameField.stringValue, suffix: suffixField.stringValue)
+            try classGenerator.buildModelFile(dict: dict!, className: baseClassNameField.stringValue)
         } catch {
             showError(title: "Error", message: "Unable to generate class files")
             return

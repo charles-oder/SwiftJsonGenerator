@@ -16,7 +16,7 @@ class ClassGeneratorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         TestFileManager().deleteTempSwiftFiles(path: "/tmp")
-        testObject = ClassGenerator(fileLocation: "/tmp/")
+        testObject = ClassGenerator(fileLocation: "/tmp/", prefix: "TST", suffix: "Model")
     }
     
     override func tearDown() {
@@ -328,24 +328,9 @@ class ClassGeneratorTests: XCTestCase {
     
     func testBuildClassHeirarchy() {
         let testJson = "{\"aString\":\"one\", \"aDouble\": 2.1, \"anInt\": 3, \"aBool\":true, \"aStringArray\":[\"one\", \"two\"], \"aDoubleArray\":[1.1, 2.2], \"anIntArray\":[1, 2], \"aBoolArray\":[true, false], \"monkey\":{\"thing\":\"one\"}, \"bananas\":[{\"thing\":\"one\", \"anotherThing\":2}]}"
-        guard let data = testJson.data(using: .utf8, allowLossyConversion: true) else {
-            XCTFail("Bad String")
-            return
-        }
-        var testDictionary: [String: Any?] = [:]
-        do {
-            guard let dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any?] else {
-                XCTFail("Bad JSON")
-                return
-            }
-            testDictionary = dict
-        } catch {
-            XCTFail("Bad JSON")
-        }
 
-        
         do {
-            try testObject.buildModelFile(dict: testDictionary, prefix: "TST", className: "Base", suffix: "Model")
+            try testObject.buildModelFile(json: testJson, className: "Base")
         } catch {
             XCTFail("Failed to create files")
         }

@@ -11,9 +11,13 @@ import Foundation
 class ClassGenerator {
     
     private var fileLocation: String
+    private var prefix: String
+    private var suffix: String
     
-    init(fileLocation: String) {
+    init(fileLocation: String, prefix: String, suffix: String) {
         self.fileLocation = fileLocation
+        self.prefix = prefix
+        self.suffix = suffix
     }
     
     func createHeaders(className: String) -> String {
@@ -172,20 +176,30 @@ class ClassGenerator {
         return [:]
     }
     
-    func buildModelFile(dict: [String: Any?], prefix: String, className: String, suffix: String) throws {
+    func buildModelFile(json: String, className: String) throws {
+        guard let data = json.data(using: .utf8, allowLossyConversion: true) else {
+            throw NSError()
+        }
+        guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any?] else {
+            throw NSError()
+        }
+        try buildModelFile(dict: dictionary, className: className)
+    }
+    
+    func buildModelFile(dict: [String: Any?], className: String) throws {
         let className = prefix + className + suffix
         
         var properties = [ObjectProperty]()
         for (key, val) in dict {
             let type = getType(key: key, val: val)
             if type.isCustom {
-                try buildModelFile(dict: getChildObjectDictionary(value: val), prefix: prefix, className: key.capitalized, suffix: suffix)
+                try buildModelFile(dict: getChildObjectDictionary(value: val), className: key.capitalized)
             }
             properties.append(ObjectProperty(name: key, type: type.type))
         }
-
+        
         try createFile(className: className, properties: properties)
-
+        
     }
     
 
