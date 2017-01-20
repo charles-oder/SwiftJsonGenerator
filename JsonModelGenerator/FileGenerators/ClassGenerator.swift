@@ -157,10 +157,10 @@ class ClassGenerator: FileGenerator {
             return (type:"[Bool]", isCustom:false)
         }
         if let _ = val as? [String: Any?] {
-            return (type:key.capitalized, isCustom:true)
+            return (type:self.prefix + key.capitalized + self.suffix, isCustom:true)
         }
         if let _ = val as? [[String: Any?]] {
-            return (type:"[\(key.capitalized)]", isCustom:true)
+            return (type:"[\(self.prefix + key.capitalized + self.suffix)]", isCustom:true)
         }
         return (type:"Any", isCustom:false)
     }

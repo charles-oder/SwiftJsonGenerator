@@ -296,7 +296,7 @@ class ClassGeneratorTests: XCTestCase {
         
         let type = testObject.getType(key: "thing", val: value)
         
-        XCTAssertEqual("Thing", type.type)
+        XCTAssertEqual("TSTThingModel", type.type)
         XCTAssertTrue(type.isCustom)
     }
     
@@ -305,7 +305,7 @@ class ClassGeneratorTests: XCTestCase {
         
         let type = testObject.getType(key: "thing", val: value)
         
-        XCTAssertEqual("[Thing]", type.type)
+        XCTAssertEqual("[TSTThingModel]", type.type)
         XCTAssertTrue(type.isCustom)
     }
     
@@ -345,8 +345,8 @@ class ClassGeneratorTests: XCTestCase {
             XCTAssertTrue(base.contains("public let aDoubleArray: [Double]?"))
             XCTAssertTrue(base.contains("public let anIntArray: [Int]?"))
             XCTAssertTrue(base.contains("public let aBoolArray: [Bool]?"))
-            XCTAssertTrue(base.contains("public let monkey: Monkey?"))
-            XCTAssertTrue(base.contains("public let bananas: [Bananas]?"))
+            XCTAssertTrue(base.contains("public let monkey: TSTMonkeyModel?"))
+            XCTAssertTrue(base.contains("public let bananas: [TSTBananasModel]?"))
         } catch {
             XCTFail("No base file found")
         }
