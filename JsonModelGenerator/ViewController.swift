@@ -57,61 +57,13 @@ class ViewController: NSViewController {
             return
         }
         
-        buildSupportFile(location: directoryField.stringValue)
-        
-    }
-    
-    func buildSupportFile(location: String) {
-        let fileContents = "// JsonExtensions.swift\n" +
-            "// Do not add multiple copies of this generated file to your project\n" +
-            "// Generated \(Date().description)\n" +
-            "import Foundation\n" +
-            "\n" +
-            "public protocol JsonModel {\n" +
-            "    init?(dict:[String: Any?]?)\n" +
-            "    var jsonDictionary: [String: Any?] { get }\n" +
-            "}\n" +
-            "\n" +
-            "public extension JsonModel {\n" +
-            "    init?(json: String) {\n" +
-            "        self.init(dict:json.jsonDict)\n" +
-            "    }\n" +
-            "\n" +
-            "    func serializeDictionary(dict: [String:Any?]) -> String? {\n" +
-            "        do {\n" +
-            "            let x = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions(rawValue: 0))\n" +
-            "            return String(data: x, encoding: .utf8)\n" +
-            "        } catch {\n" +
-            "            return nil\n" +
-            "        }\n" +
-            "    }\n" +
-            "    \n" +
-            "    var jsonString: String? {\n" +
-            "        return serializeDictionary(dict: jsonDictionary)\n" +
-            "    }\n" +
-            "\n" +
-            "}\n" +
-            "\n" +
-            "public extension String {\n" +
-            "    var jsonDict: [String: Any] {\n" +
-            "        do {\n" +
-            "            guard let data = data(using: .utf8, allowLossyConversion: true) else { return [:] }\n" +
-            "            guard let dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any?] else { return [:] }\n" +
-            "            return dict\n" +
-            "        } catch {\n" +
-            "            return [:]\n" +
-            "        }\n" +
-            "    }\n" +
-            "}"
-        let fileName = "JsonExtensions.swift"
-        let url = URL(fileURLWithPath: location + fileName)
         do {
-            try fileContents.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
+            try JsonExtensionsGenerator(fileLocation: directoryField.stringValue).buildSupportFile()
         } catch {
-            showError(title: "Error", message: "Could not write file: \(location)")
-            
+            showError(title: "Error", message: "Could not create JsonExtensions file in directory: \(directoryField.stringValue)")
         }
-
+        showSuccess(title: "Success!", message: "Model Files Generated")
+        
     }
     
     func buildModelFile(dict: [String: Any?], location: String, prefix: String, className: String, suffix: String) -> String {
@@ -237,6 +189,15 @@ class ViewController: NSViewController {
             return "[\(type)]"
         }
         return "Any"
+    }
+    
+    func showSuccess(title: String, message: String) {
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = title
+        alert.informativeText = message
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
     
     func showError(title: String, message: String) {
