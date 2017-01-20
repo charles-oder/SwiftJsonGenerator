@@ -24,18 +24,18 @@ class JsonExtensionsGenerator {
             "import Foundation\n" +
             "\n" +
             "public protocol JsonModel {\n" +
-            "    init?(dict:[String: Any?]?)\n" +
+            "    init?(dictionary:[String: Any?]?)\n" +
             "    var jsonDictionary: [String: Any?] { get }\n" +
             "}\n" +
             "\n" +
             "public extension JsonModel {\n" +
             "    public init?(json: String) {\n" +
-            "        self.init(dict:json.jsonDict)\n" +
+            "        self.init(dictionary:json.jsonDict)\n" +
             "    }\n" +
             "\n" +
-            "    public func serializeDictionary(dict: [String:Any?]) -> String? {\n" +
+            "    public func serializeDictionary(dictionary: [String:Any?]) -> String? {\n" +
             "        do {\n" +
-            "            let x = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions(rawValue: 0))\n" +
+            "            let x = try JSONSerialization.data(withJSONObject: dictionary, options: JSONSerialization.WritingOptions(rawValue: 0))\n" +
             "            return String(data: x, encoding: .utf8)\n" +
             "        } catch {\n" +
             "            return nil\n" +
@@ -43,7 +43,7 @@ class JsonExtensionsGenerator {
             "    }\n" +
             "    \n" +
             "    public var jsonString: String? {\n" +
-            "        return serializeDictionary(dict: jsonDictionary)\n" +
+            "        return serializeDictionary(dictionary: jsonDictionary)\n" +
             "    }\n" +
             "\n" +
             "}\n" +

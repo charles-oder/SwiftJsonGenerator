@@ -17,8 +17,8 @@ struct TestModel: JsonModel {
         self.thing = thing
     }
     
-    public init?(dict: [String : Any?]?) {
-        thing = dict?["thing"] as? String
+    public init?(dictionary: [String : Any?]?) {
+        thing = dictionary?["thing"] as? String
     }
 
     public var jsonDictionary: [String : Any?] {
