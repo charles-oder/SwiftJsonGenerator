@@ -16,7 +16,7 @@ class ClassGeneratorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         TestFileManager().deleteTempSwiftFiles(path: "/tmp")
-        testObject = ClassGenerator(fileLocation: "/tmp")
+        testObject = ClassGenerator(fileLocation: "/tmp/")
     }
     
     override func tearDown() {
