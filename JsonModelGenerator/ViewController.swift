@@ -87,14 +87,29 @@ class ViewController: NSViewController {
         var fileContents = "// \(fileName)\n"
         fileContents += "// Generated \(Date().description)\n"
         fileContents += "\n"
+        
         fileContents += "import Foundation\n"
         fileContents += "\n"
+        
         fileContents += "public struct \(className): JsonModel {\n"
         fileContents += "\n"
         for property in properties {
             fileContents += "    public let \(property.name): \(property.type)?\n"
         }
         fileContents += "\n"
+        
+        fileContents += "       public init(\n"
+        for property in properties {
+            fileContents += "               \(property.name): \(property.type)?\(property.name != properties.last?.name ? "," : "")\n"
+        }
+        fileContents += "                   ) {\n"
+        for property in properties {
+            fileContents += "       self.\(property.name) = \(property.name)\n"
+        }
+        fileContents += "       }\n"
+        fileContents += "\n"
+
+        
         fileContents += "    public init?(dict:[String: Any?]?) {\n"
         fileContents += "\n"
         for property in properties {
@@ -122,6 +137,7 @@ class ViewController: NSViewController {
         fileContents += "\n"
         fileContents += "    }\n"
         fileContents += "\n"
+        
         fileContents += "    public var jsonDictionary: [String: Any?] {\n"
         fileContents += "\n"
         fileContents += "        var dict = [String: Any?]()\n"
