@@ -19,6 +19,7 @@
 		E189BB701E326028003E2017 /* ClassGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB6F1E326028003E2017 /* ClassGenerator.swift */; };
 		E189BB721E32606C003E2017 /* ClassGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB711E32606C003E2017 /* ClassGeneratorTests.swift */; };
 		E189BB741E32641B003E2017 /* TestFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB731E32641B003E2017 /* TestFileManager.swift */; };
+		E194DC1D1E3296FC00008FD7 /* FileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E194DC1C1E3296FC00008FD7 /* FileGenerator.swift */; };
 		E1E09D841E314365002A3092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D831E314365002A3092 /* AppDelegate.swift */; };
 		E1E09D861E314365002A3092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D851E314365002A3092 /* ViewController.swift */; };
 		E1E09D881E314365002A3092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1E09D871E314365002A3092 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		E189BB6F1E326028003E2017 /* ClassGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassGenerator.swift; sourceTree = "<group>"; };
 		E189BB711E32606C003E2017 /* ClassGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassGeneratorTests.swift; sourceTree = "<group>"; };
 		E189BB731E32641B003E2017 /* TestFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFileManager.swift; sourceTree = "<group>"; };
+		E194DC1C1E3296FC00008FD7 /* FileGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileGenerator.swift; sourceTree = "<group>"; };
 		E1E09D801E314365002A3092 /* JsonModelGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonModelGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E09D831E314365002A3092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1E09D851E314365002A3092 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				E114C91F1E324DA500C172EB /* JsonExtensions.swift */,
 				E114C91B1E31BE4000C172EB /* JsonExtensionsGenerator.swift */,
 				E189BB6F1E326028003E2017 /* ClassGenerator.swift */,
+				E194DC1C1E3296FC00008FD7 /* FileGenerator.swift */,
 			);
 			path = FileGenerators;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				E114C8F71E31B67100C172EB /* Double+IntCheck.swift in Sources */,
 				E114C8FB1E31BA3300C172EB /* Array+JsonDictionary.swift in Sources */,
 				E114C91C1E31BE4000C172EB /* JsonExtensionsGenerator.swift in Sources */,
+				E194DC1D1E3296FC00008FD7 /* FileGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

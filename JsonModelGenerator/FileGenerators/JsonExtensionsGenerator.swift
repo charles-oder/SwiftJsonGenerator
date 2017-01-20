@@ -8,13 +8,7 @@
 
 import Foundation
 
-class JsonExtensionsGenerator {
-    
-    private var fileLocation: String
-    
-    init(fileLocation: String) {
-        self.fileLocation = fileLocation
-    }
+class JsonExtensionsGenerator: FileGenerator {
     
     func buildSupportFile() throws {
         let fileContents = "// JsonExtensions.swift\n" +
@@ -63,8 +57,4 @@ class JsonExtensionsGenerator {
         try write(body: fileContents, toFile: fileName)
     }
     
-    private func write(body: String, toFile: String) throws {
-        let url = URL(fileURLWithPath: fileLocation + toFile)
-        try body.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
-    }
 }

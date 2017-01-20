@@ -8,16 +8,15 @@
 
 import Foundation
 
-class ClassGenerator {
+class ClassGenerator: FileGenerator {
     
-    private var fileLocation: String
     private var prefix: String
     private var suffix: String
     
     init(fileLocation: String, prefix: String, suffix: String) {
-        self.fileLocation = fileLocation.hasSuffix("/") ? fileLocation : fileLocation + "/" 
         self.prefix = prefix
         self.suffix = suffix
+        super.init(fileLocation: fileLocation)
     }
     
     func createHeaders(className: String) -> String {
@@ -120,7 +119,6 @@ class ClassGenerator {
     
     func createFile(className: String, properties:[ObjectProperty]) throws {
         let fileName = className + ".swift"
-        let url = URL(fileURLWithPath: fileLocation + fileName)
         
         let fileContents = createHeaders(className: className) +
             createClassDeclaration(className: className) +
@@ -130,7 +128,7 @@ class ClassGenerator {
             createJsonDictionaryDefinition(properties: properties) +
             createFooter()
         
-        try fileContents.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
+        try write(body: fileContents, toFile: fileName)
     }
     
     func getType(key: String, val: Any?) -> (type:String, isCustom:Bool) {
