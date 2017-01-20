@@ -248,13 +248,5 @@ class ViewController: NSViewController {
         alert.runModal()
     }
     
-    func dictionaryProperties(dict: [String: Any?]) -> String {
-        var string = ""
-        for (key, val) in dict {
-            string += "\(key):\(String(describing: type(of: val!)))\r"
-        }
-        return string
-    }
-
 }
 
