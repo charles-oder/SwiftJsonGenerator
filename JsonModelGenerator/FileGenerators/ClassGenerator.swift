@@ -28,5 +28,16 @@ class ClassGenerator {
     func createClassDeclaration(className: String) -> String {
         return "public struct \(className): JsonModel {\n\n"
     }
+    
+    func createPropertyList(properties:[ObjectProperty]) -> String {
+        var propList = ""
+        for property in properties {
+            propList += "    public let \(property.name): \(property.type)?\n"
+        }
+        propList += "\n"
+        return propList
+    }
+    
+
 
 }

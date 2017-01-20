@@ -89,7 +89,7 @@ class ViewController: NSViewController {
         
         var fileContents = classGenerator.createHeaders(className: className)
         fileContents += classGenerator.createClassDeclaration(className: className)
-        fileContents += createPropertyList(properties: properties)
+        fileContents += classGenerator.createPropertyList(properties: properties)
         fileContents += createInitWithPropertyArgs(properties: properties)
         fileContents += createInitWithDictionaryMethod(properties: properties)
         fileContents += createJsonDictionaryDefinition(properties: properties)
@@ -101,15 +101,6 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Could not write file: \(location)")
             
         }
-    }
-    
-    func createPropertyList(properties:[ObjectProperty]) -> String {
-        var propList = ""
-        for property in properties {
-            propList += "    public let \(property.name): \(property.type)?\n"
-        }
-        propList += "\n"
-        return propList
     }
     
     func createInitWithPropertyArgs(properties:[ObjectProperty]) -> String {
