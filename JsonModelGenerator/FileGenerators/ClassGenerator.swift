@@ -15,7 +15,7 @@ class ClassGenerator {
     private var suffix: String
     
     init(fileLocation: String, prefix: String, suffix: String) {
-        self.fileLocation = fileLocation
+        self.fileLocation = fileLocation.hasSuffix("/") ? fileLocation : fileLocation + "/" 
         self.prefix = prefix
         self.suffix = suffix
     }

@@ -328,7 +328,7 @@ class ClassGeneratorTests: XCTestCase {
     
     func testBuildClassHeirarchy() {
         let testJson = "{\"aString\":\"one\", \"aDouble\": 2.1, \"anInt\": 3, \"aBool\":true, \"aStringArray\":[\"one\", \"two\"], \"aDoubleArray\":[1.1, 2.2], \"anIntArray\":[1, 2], \"aBoolArray\":[true, false], \"monkey\":{\"thing\":\"one\"}, \"bananas\":[{\"thing\":\"one\", \"anotherThing\":2}]}"
-
+        
         do {
             try testObject.buildModelFile(json: testJson, className: "Base")
         } catch {
@@ -364,8 +364,24 @@ class ClassGeneratorTests: XCTestCase {
             XCTFail("No bananas found")
         }
         
+    }
+    
+    func testBuildFileWithNoTrailingSlashInDirectory() {
+        testObject = ClassGenerator(fileLocation: "/tmp", prefix: "BAM", suffix: "Payload")
+        let testJson = "{\"aString\":\"one\"}"
         
+        do {
+            try testObject.buildModelFile(json: testJson, className: "Base")
+        } catch {
+            XCTFail("Failed to create files")
+        }
         
+        do {
+            let base = try String(contentsOfFile: "/tmp/BAMBasePayload.swift")
+            XCTAssertTrue(base.contains("public let aString: String?"))
+        } catch {
+            XCTFail("No base file found")
+        }
         
     }
     
