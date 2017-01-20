@@ -39,15 +39,15 @@ class ClassGenerator {
     }
     
     func createInitWithPropertyArgs(properties:[ObjectProperty]) -> String {
-        var initMethod = "       public init(\n"
+        var initMethod = "    public init(\n"
         for property in properties {
-            initMethod += "                   \(property.name): \(property.type)?\(property.name != properties.last?.name ? "," : "")\n"
+            initMethod += "                \(property.name): \(property.type)?\(property.name != properties.last?.name ? "," : "")\n"
         }
-        initMethod += "                   ) {\n"
+        initMethod += "                ) {\n"
         for property in properties {
-            initMethod += "           self.\(property.name) = \(property.name)\n"
+            initMethod += "        self.\(property.name) = \(property.name)\n"
         }
-        initMethod += "       }\n\n"
+        initMethod += "    }\n\n"
         return initMethod
     }
     
