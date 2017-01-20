@@ -146,7 +146,7 @@ class ViewController: NSViewController {
         fileContents += "    public init?(dict:[String: Any?]?) {\n"
         fileContents += "\n"
         for property in properties {
-            if isCustomType(type: property.type) {
+            if property.isCustomType {
                 if isArray(type: property.type) {
                     let type = getArrayType(type: property.type)
                     fileContents += "        if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
@@ -175,7 +175,7 @@ class ViewController: NSViewController {
         fileContents += "\n"
         fileContents += "        var dict = [String: Any?]()\n"
         for property in properties {
-            if isCustomType(type: property.type) {
+            if property.isCustomType {
                 if isArray(type: property.type) {
                     fileContents += "        if let objArray = \(property.name) {\n"
                     fileContents += "            var dictArray = [[String: Any?]]()\n"
@@ -203,10 +203,6 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Could not write file: \(location)")
             
         }
-    }
-    
-    func isCustomType(type: String) -> Bool {
-        return type != "String" && type != "Int" && type != "Double" && type != "Bool" && type != "[String]" && type != "[Int]" && type != "[Double]" && type != "[Bool]"
     }
     
     func getArrayType(type: String) -> String {
