@@ -118,10 +118,10 @@ class ViewController: NSViewController {
         
         let className = prefix + className + suffix
         
-        var properties = [(name: String, type: String)]()
+        var properties = [ObjectProperty]()
         for (key, val) in dict {
             let type = getType(key: key, val: val, location: location, prefix: prefix, suffix: suffix)
-            properties.append((name: key, type: type))
+            properties.append(ObjectProperty(name: key, type: type))
         }
         createFile(location: location, className: className, properties: properties)
         
@@ -129,7 +129,7 @@ class ViewController: NSViewController {
         
     }
     
-    func createFile(location: String, className: String, properties:[(name: String, type: String)]) {
+    func createFile(location: String, className: String, properties:[ObjectProperty]) {
         let fileName = className + ".swift"
         let url = URL(fileURLWithPath: location + fileName)
         var fileContents = "// \(fileName)\n"

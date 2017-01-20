@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E114C8F51E31AFBE00C172EB /* ObjectProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8F41E31AFBE00C172EB /* ObjectProperty.swift */; };
 		E1E09D841E314365002A3092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D831E314365002A3092 /* AppDelegate.swift */; };
 		E1E09D861E314365002A3092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E09D851E314365002A3092 /* ViewController.swift */; };
 		E1E09D881E314365002A3092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1E09D871E314365002A3092 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E114C8F41E31AFBE00C172EB /* ObjectProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectProperty.swift; sourceTree = "<group>"; };
 		E1E09D801E314365002A3092 /* JsonModelGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonModelGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E09D831E314365002A3092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1E09D851E314365002A3092 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				E1E09D871E314365002A3092 /* Assets.xcassets */,
 				E1E09D891E314365002A3092 /* Main.storyboard */,
 				E1E09D8C1E314365002A3092 /* Info.plist */,
+				E114C8F41E31AFBE00C172EB /* ObjectProperty.swift */,
 			);
 			path = JsonModelGenerator;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E114C8F51E31AFBE00C172EB /* ObjectProperty.swift in Sources */,
 				E1E09D861E314365002A3092 /* ViewController.swift in Sources */,
 				E1E09D841E314365002A3092 /* AppDelegate.swift in Sources */,
 			);
@@ -400,6 +404,7 @@
 				E1E09D9C1E314365002A3092 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1E09D9D1E314365002A3092 /* Build configuration list for PBXNativeTarget "JsonModelGeneratorTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +413,7 @@
 				E1E09D9F1E314365002A3092 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

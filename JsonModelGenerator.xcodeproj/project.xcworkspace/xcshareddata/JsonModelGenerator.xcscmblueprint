@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "28FE649C482D3E779F069F517C82D0D7A57F0AF8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4C659076BA1FD23DE9303B229E2E92C83E51B27A" : 9223372036854775807,
+    "28FE649C482D3E779F069F517C82D0D7A57F0AF8" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C2347D6E-A64A-4AEA-AFBB-25722B085167",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4C659076BA1FD23DE9303B229E2E92C83E51B27A" : "JsonSerializerComparison\/",
+    "28FE649C482D3E779F069F517C82D0D7A57F0AF8" : "JsonModelGenerator\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JsonModelGenerator",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JsonModelGenerator.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/charles-oder\/SwiftJsonGenerator.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "28FE649C482D3E779F069F517C82D0D7A57F0AF8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/charles-oder\/SwiftJsonComparison.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4C659076BA1FD23DE9303B229E2E92C83E51B27A"
+    }
+  ]
+}
