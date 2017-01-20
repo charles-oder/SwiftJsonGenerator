@@ -204,16 +204,12 @@ class ViewController: NSViewController {
         }
     }
     
-//    func getArrayType(type: String) -> String {
-//        return type.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
-//    }
-    
     func getType(key: String, val: Any?, location: String, prefix: String, suffix: String) -> String {
          if let _ = val as? String {
             return "String"
         }
         if let num = val as? Double {
-            return isReallyAnInt(num) ? "Int" : "Double"
+            return num.isReallyAnInt ? "Int" : "Double"
         }
         if let _ = val as? Bool {
             return "Bool"
@@ -224,7 +220,7 @@ class ViewController: NSViewController {
         if let numArray = val as? [Double] {
             var type = "[Double]"
             for num in numArray {
-                if isReallyAnInt(num) {
+                if num.isReallyAnInt {
                     type = "[Int]"
                 }
             }
@@ -241,10 +237,6 @@ class ViewController: NSViewController {
             return "[\(type)]"
         }
         return "Any"
-    }
-    
-    func isReallyAnInt(_ num: Double) -> Bool {
-        return num == Double(Int(num))
     }
     
     func mergeDictArray(array: [[String:Any?]]) -> [String: Any?] {
