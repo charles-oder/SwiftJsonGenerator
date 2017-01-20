@@ -169,23 +169,23 @@ class ViewController: NSViewController {
             if isCustomType(type: property.type) {
                 if isArray(type: property.type) {
                     let type = getArrayType(type: property.type)
-                    fileContents += "       if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
-                    fileContents += "           var objectArray = [\(type)]()\n"
-                    fileContents += "           for dict in dictArray {\n"
-                    fileContents += "               if let obj = \(type)(dict:dict){\n"
-                    fileContents += "                   objectArray.append(obj)\n"
-                    fileContents += "               }\n"
-                    fileContents += "           }\n"
-                    fileContents += "           \(property.name) = objectArray\n"
-                    fileContents += "       } else {\n"
-                    fileContents += "           \(property.name) = nil\n"
-                    fileContents += "       }\n"
+                    fileContents += "        if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
+                    fileContents += "            var objectArray = [\(type)]()\n"
+                    fileContents += "            for dict in dictArray {\n"
+                    fileContents += "                if let obj = \(type)(dict:dict){\n"
+                    fileContents += "                    objectArray.append(obj)\n"
+                    fileContents += "                }\n"
+                    fileContents += "            }\n"
+                    fileContents += "            \(property.name) = objectArray\n"
+                    fileContents += "        } else {\n"
+                    fileContents += "            \(property.name) = nil\n"
+                    fileContents += "        }\n"
                     
                 } else {
-                    fileContents += "           \(property.name) = \(property.type)(dict:(dict?[\"\(property.name)\"] as? [String:Any?]))\n"
+                    fileContents += "        \(property.name) = \(property.type)(dict:(dict?[\"\(property.name)\"] as? [String:Any?]))\n"
                 }
             } else {
-                fileContents += "           \(property.name) = dict?[\"\(property.name)\"] as? \(property.type)\n"
+                fileContents += "        \(property.name) = dict?[\"\(property.name)\"] as? \(property.type)\n"
             }
         }
         fileContents += "\n"
@@ -198,13 +198,13 @@ class ViewController: NSViewController {
             if isCustomType(type: property.type) {
                 if isArray(type: property.type) {
                     let type = getArrayType(type: property.type)
-                    fileContents += "       if let objArray = \(property.name) {\n"
-                    fileContents += "           var dictArray = [[String: Any?]]()\n"
-                    fileContents += "           for obj in objArray {\n"
-                    fileContents += "               dictArray.append(obj.jsonDictionary)\n"
-                    fileContents += "           }\n"
-                    fileContents += "           dict[\"\(property.name)\"] = dictArray\n"
-                    fileContents += "       }\n"
+                    fileContents += "        if let objArray = \(property.name) {\n"
+                    fileContents += "            var dictArray = [[String: Any?]]()\n"
+                    fileContents += "            for obj in objArray {\n"
+                    fileContents += "                dictArray.append(obj.jsonDictionary)\n"
+                    fileContents += "            }\n"
+                    fileContents += "            dict[\"\(property.name)\"] = dictArray\n"
+                    fileContents += "        }\n"
                     
                 } else {
                     fileContents += "        dict[\"\(property.name)\"] = \(property.name)?.jsonDictionary\n"
@@ -215,7 +215,7 @@ class ViewController: NSViewController {
 
         }
         fileContents += "\n"
-        fileContents += "    return dict\n"
+        fileContents += "        return dict\n"
         fileContents += "    }\n"
         fileContents += "}\n"
         do {
