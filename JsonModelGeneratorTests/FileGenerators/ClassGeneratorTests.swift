@@ -309,4 +309,21 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertTrue(type.isCustom)
     }
     
+    func testGetChildObjectDictionaryForDictionary() {
+        let expectedDict = ["thing":"one"]
+        
+        let actualDictionary = testObject.getChildObjectDictionary(value: expectedDict)
+        
+        XCTAssertEqual("one", actualDictionary["thing"] as? String)
+    }
+    
+    func testGetChildObjectDictionaryForDictionaryArray() {
+        let expectedDict = [["thing":"one"], ["otherThing":"two"]]
+        
+        let actualDictionary = testObject.getChildObjectDictionary(value: expectedDict)
+        
+        XCTAssertEqual("one", actualDictionary["thing"] as? String)
+        XCTAssertEqual("two", actualDictionary["otherThing"] as? String)
+    }
+    
 }

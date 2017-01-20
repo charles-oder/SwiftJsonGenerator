@@ -163,6 +163,13 @@ class ClassGenerator {
         return (type:"Any", isCustom:false)
     }
     
-
+    func getChildObjectDictionary(value: Any?) ->[String:Any?] {
+        if let dictionary = value as? [String: Any?] {
+            return dictionary
+        } else if let dictionaryArray = value as? [[String: Any?]] {
+            return dictionaryArray.mergedArray
+        }
+        return [:]
+    }
 
 }
