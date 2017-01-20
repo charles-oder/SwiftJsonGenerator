@@ -177,7 +177,6 @@ class ViewController: NSViewController {
         for property in properties {
             if isCustomType(type: property.type) {
                 if isArray(type: property.type) {
-                    let type = getArrayType(type: property.type)
                     fileContents += "        if let objArray = \(property.name) {\n"
                     fileContents += "            var dictArray = [[String: Any?]]()\n"
                     fileContents += "            for obj in objArray {\n"
