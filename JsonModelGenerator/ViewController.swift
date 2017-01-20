@@ -137,7 +137,7 @@ class ViewController: NSViewController {
         fileContents += "\n"
         fileContents += "import Foundation\n"
         fileContents += "\n"
-        fileContents += "public final class \(className): JsonModel {\n"
+        fileContents += "public struct \(className): JsonModel {\n"
         fileContents += "\n"
         for property in properties {
             fileContents += "    public let \(property.name): \(property.type)?\n"
