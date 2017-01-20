@@ -50,5 +50,20 @@ class ClassGeneratorTests: XCTestCase {
         
         XCTAssertEqual(expectedList, testString)
     }
+    
+    func testInitWithPropertyArgs() {
+        let expectedList =  "       public init(\n" +
+                            "                   thing: String?,\n" +
+                            "                   otherThing: Int?\n" +
+                            "                   ) {\n" +
+                            "           self.thing = thing\n" +
+                            "           self.otherThing = otherThing\n" +
+                            "       }\n\n"
+        let propertyList = [ObjectProperty(name: "thing", type: "String"), ObjectProperty(name: "otherThing", type: "Int")]
+        
+        let testString = testObject.createInitWithPropertyArgs(properties: propertyList)
+        
+        XCTAssertEqual(expectedList, testString)
+    }
 
 }

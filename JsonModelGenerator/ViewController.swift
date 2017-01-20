@@ -90,7 +90,7 @@ class ViewController: NSViewController {
         var fileContents = classGenerator.createHeaders(className: className)
         fileContents += classGenerator.createClassDeclaration(className: className)
         fileContents += classGenerator.createPropertyList(properties: properties)
-        fileContents += createInitWithPropertyArgs(properties: properties)
+        fileContents += classGenerator.createInitWithPropertyArgs(properties: properties)
         fileContents += createInitWithDictionaryMethod(properties: properties)
         fileContents += createJsonDictionaryDefinition(properties: properties)
         fileContents += createFooter()
@@ -101,19 +101,6 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Could not write file: \(location)")
             
         }
-    }
-    
-    func createInitWithPropertyArgs(properties:[ObjectProperty]) -> String {
-        var initMethod = "       public init(\n"
-        for property in properties {
-            initMethod += "               \(property.name): \(property.type)?\(property.name != properties.last?.name ? "," : "")\n"
-        }
-        initMethod += "                   ) {\n"
-        for property in properties {
-            initMethod += "       self.\(property.name) = \(property.name)\n"
-        }
-        initMethod += "       }\n\n"
-        return initMethod
     }
     
     func createInitWithDictionaryMethod(properties:[ObjectProperty]) -> String {
