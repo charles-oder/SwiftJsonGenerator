@@ -158,6 +158,12 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertEqual(expectedString, testString)
     }
     
-    
+    func testCreateFooter() {
+        let expectedFooter = "}\n"
+        
+        let testString = testObject.createFooter()
+        
+        XCTAssertEqual(expectedFooter, testString)
+    }
     
 }

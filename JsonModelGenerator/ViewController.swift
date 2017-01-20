@@ -93,7 +93,7 @@ class ViewController: NSViewController {
         fileContents += classGenerator.createInitWithPropertyArgs(properties: properties)
         fileContents += classGenerator.createInitWithDictionaryMethod(properties: properties)
         fileContents += classGenerator.createJsonDictionaryDefinition(properties: properties)
-        fileContents += createFooter()
+        fileContents += classGenerator.createFooter()
         
         do {
             try fileContents.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
@@ -101,10 +101,6 @@ class ViewController: NSViewController {
             showError(title: "Error", message: "Could not write file: \(location)")
             
         }
-    }
-    
-    func createFooter() -> String {
-        return "}\n"
     }
     
     func getType(key: String, val: Any?, location: String, prefix: String, suffix: String) -> String {

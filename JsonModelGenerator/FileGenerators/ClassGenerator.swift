@@ -109,5 +109,9 @@ class ClassGenerator {
         output += "    }\n\n"
         return output
     }
+    
+    func createFooter() -> String {
+        return "}\n"
+    }
 
 }
