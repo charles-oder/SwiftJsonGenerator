@@ -14,7 +14,13 @@ struct ObjectProperty {
 }
 
 extension ObjectProperty {
+    
     var isCustomType: Bool {
         return type != "String" && type != "Int" && type != "Double" && type != "Bool" && type != "[String]" && type != "[Int]" && type != "[Double]" && type != "[Bool]"
     }
+    
+    var isArray: Bool {
+        return type.hasPrefix("[") && type.hasSuffix("]")
+    }
+    
 }

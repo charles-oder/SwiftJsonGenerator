@@ -147,7 +147,7 @@ class ViewController: NSViewController {
         fileContents += "\n"
         for property in properties {
             if property.isCustomType {
-                if isArray(type: property.type) {
+                if property.isArray {
                     let type = getArrayType(type: property.type)
                     fileContents += "        if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
                     fileContents += "            var objectArray = [\(type)]()\n"
@@ -176,7 +176,7 @@ class ViewController: NSViewController {
         fileContents += "        var dict = [String: Any?]()\n"
         for property in properties {
             if property.isCustomType {
-                if isArray(type: property.type) {
+                if property.isArray {
                     fileContents += "        if let objArray = \(property.name) {\n"
                     fileContents += "            var dictArray = [[String: Any?]]()\n"
                     fileContents += "            for obj in objArray {\n"
@@ -207,10 +207,6 @@ class ViewController: NSViewController {
     
     func getArrayType(type: String) -> String {
         return type.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
-    }
-    
-    func isArray(type: String) -> Bool {
-        return type.hasPrefix("[") && type.hasSuffix("]")
     }
     
     func getType(key: String, val: Any?, location: String, prefix: String, suffix: String) -> String {

@@ -71,4 +71,17 @@ class ObjectPropertyTests: XCTestCase {
         XCTAssertTrue(testObject.isCustomType)
     }
     
+    func testArrayIsArray() {
+        let testObject = ObjectProperty(name: "thing", type: "Monkey")
+        
+        XCTAssertFalse(testObject.isArray)
+    }
+    
+    func testNonArrayIsNotArray() {
+        let testObject = ObjectProperty(name: "thing", type: "[Monkey]")
+        
+        XCTAssertTrue(testObject.isArray)
+    }
+    
+    
 }
