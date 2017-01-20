@@ -171,5 +171,23 @@ class ClassGenerator {
         }
         return [:]
     }
+    
+    func buildModelFile(dict: [String: Any?], prefix: String, className: String, suffix: String) throws {
+        let className = prefix + className + suffix
+        
+        var properties = [ObjectProperty]()
+        for (key, val) in dict {
+            let type = getType(key: key, val: val)
+            if type.isCustom {
+                try buildModelFile(dict: getChildObjectDictionary(value: val), prefix: prefix, className: key.capitalized, suffix: suffix)
+            }
+            properties.append(ObjectProperty(name: key, type: type.type))
+        }
+
+        try createFile(className: className, properties: properties)
+
+    }
+    
+
 
 }

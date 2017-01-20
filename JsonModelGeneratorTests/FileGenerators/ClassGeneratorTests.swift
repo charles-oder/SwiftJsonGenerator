@@ -326,4 +326,62 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertEqual("two", actualDictionary["otherThing"] as? String)
     }
     
+    func testBuildClassHeirarchy() {
+        let testJson = "{\"aString\":\"one\", \"aDouble\": 2.1, \"anInt\": 3, \"aBool\":true, \"aStringArray\":[\"one\", \"two\"], \"aDoubleArray\":[1.1, 2.2], \"anIntArray\":[1, 2], \"aBoolArray\":[true, false], \"monkey\":{\"thing\":\"one\"}, \"bananas\":[{\"thing\":\"one\", \"anotherThing\":2}]}"
+        guard let data = testJson.data(using: .utf8, allowLossyConversion: true) else {
+            XCTFail("Bad String")
+            return
+        }
+        var testDictionary: [String: Any?] = [:]
+        do {
+            guard let dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any?] else {
+                XCTFail("Bad JSON")
+                return
+            }
+            testDictionary = dict
+        } catch {
+            XCTFail("Bad JSON")
+        }
+
+        
+        do {
+            try testObject.buildModelFile(dict: testDictionary, prefix: "TST", className: "Base", suffix: "Model")
+        } catch {
+            XCTFail("Failed to create files")
+        }
+        
+        do {
+            let base = try String(contentsOfFile: "/tmp/TSTBaseModel.swift")
+            XCTAssertTrue(base.contains("public let aString: String?"))
+            XCTAssertTrue(base.contains("public let aDouble: Double?"))
+            XCTAssertTrue(base.contains("public let anInt: Int?"))
+            XCTAssertTrue(base.contains("public let aBool: Bool?"))
+            XCTAssertTrue(base.contains("public let aStringArray: [String]?"))
+            XCTAssertTrue(base.contains("public let aDoubleArray: [Double]?"))
+            XCTAssertTrue(base.contains("public let anIntArray: [Int]?"))
+            XCTAssertTrue(base.contains("public let aBoolArray: [Bool]?"))
+            XCTAssertTrue(base.contains("public let monkey: Monkey?"))
+            XCTAssertTrue(base.contains("public let bananas: [Bananas]?"))
+        } catch {
+            XCTFail("No base file found")
+        }
+        do {
+            let monkey = try String(contentsOfFile: "/tmp/TSTMonkeyModel.swift")
+            XCTAssertTrue(monkey.contains("public let thing: String?"))
+        } catch {
+            XCTFail("No monkey found")
+        }
+        do {
+            let bananas = try String(contentsOfFile: "/tmp/TSTBananasModel.swift")
+            XCTAssertTrue(bananas.contains("public let thing: String?"))
+            XCTAssertTrue(bananas.contains("public let anotherThing: Int?"))
+        } catch {
+            XCTFail("No bananas found")
+        }
+        
+        
+        
+        
+    }
+    
 }
