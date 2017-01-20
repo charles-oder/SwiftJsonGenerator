@@ -219,4 +219,94 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertTrue(testFile?.hasSuffix(expectedSuffix) == true)
     }
     
+    func testGetTypeForString() {
+        let value = "something"
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("String", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForDouble() {
+        let value = Double(1.1)
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("Double", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForInt() {
+        let value = Double(1)
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("Int", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForBool() {
+        let value = true
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("Bool", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForStringArray() {
+        let value = ["something"]
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("[String]", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForDoubleArray() {
+        let value = [Double(1.1)]
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("[Double]", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForIntArray() {
+        let value = [Double(1)]
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("[Int]", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForBoolArray() {
+        let value = [true]
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("[Bool]", type.type)
+        XCTAssertFalse(type.isCustom)
+    }
+    
+    func testGetTypeForCustom() {
+        let value = [String:Any?]()
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("Thing", type.type)
+        XCTAssertTrue(type.isCustom)
+    }
+    
+    func testGetTypeForCustomArray() {
+        let value = [[String:Any?]()]
+        
+        let type = testObject.getType(key: "thing", val: value)
+        
+        XCTAssertEqual("[Thing]", type.type)
+        XCTAssertTrue(type.isCustom)
+    }
+    
 }

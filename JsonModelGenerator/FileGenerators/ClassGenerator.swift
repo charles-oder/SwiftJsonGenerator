@@ -128,5 +128,41 @@ class ClassGenerator {
         
         try fileContents.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
     }
+    
+    func getType(key: String, val: Any?) -> (type:String, isCustom:Bool) {
+        if let _ = val as? String {
+            return (type:"String", isCustom:false)
+        }
+        if let num = val as? Double {
+            return num.isReallyAnInt ? (type:"Int", isCustom:false) : (type:"Double", isCustom:false)
+        }
+        if let _ = val as? Bool {
+            return (type:"Bool", isCustom:false)
+        }
+        if let _ = val as? [String] {
+            return (type:"[String]", isCustom:false)
+        }
+        if let numArray = val as? [Double] {
+            var type = (type:"[Double]", isCustom:false)
+            for num in numArray {
+                if num.isReallyAnInt {
+                    type = (type:"[Int]", isCustom:false)
+                }
+            }
+            return type
+        }
+        if let _ = val as? [Bool] {
+            return (type:"[Bool]", isCustom:false)
+        }
+        if let _ = val as? [String: Any?] {
+            return (type:key.capitalized, isCustom:true)
+        }
+        if let _ = val as? [[String: Any?]] {
+            return (type:"[\(key.capitalized)]", isCustom:true)
+        }
+        return (type:"Any", isCustom:false)
+    }
+    
+
 
 }
