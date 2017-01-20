@@ -56,22 +56,22 @@ class ClassGenerator {
         initMethod += "\n"
         for property in properties {
             if property.isCustomType {
-//                if property.isArray {
-//                    initMethod += "        if let dictArray = dict?[\"\(property.name)\"] as? [[String: Any?]] {\n"
-//                    initMethod += "            var objectArray = [\(property.arrayType)]()\n"
-//                    initMethod += "            for dict in dictArray {\n"
-//                    initMethod += "                if let obj = \(property.arrayType)(dict:dict){\n"
-//                    initMethod += "                    objectArray.append(obj)\n"
-//                    initMethod += "                }\n"
-//                    initMethod += "            }\n"
-//                    initMethod += "            \(property.name) = objectArray\n"
-//                    initMethod += "        } else {\n"
-//                    initMethod += "            \(property.name) = nil\n"
-//                    initMethod += "        }\n"
-//                    
-//                } else {
+                if property.isArray {
+                    initMethod += "        if let dictionaryArray = dictionary?[\"\(property.name)\"] as? [[String:Any?]] {\n"
+                    initMethod += "            var objectArray = [\(property.arrayType)]()\n"
+                    initMethod += "            for d in dictionaryArray {\n"
+                    initMethod += "                if let object = \(property.arrayType)(dictionary:d) {\n"
+                    initMethod += "                    objectArray.append(object)\n"
+                    initMethod += "                }\n"
+                    initMethod += "            }\n"
+                    initMethod += "            self.\(property.name) = objectArray\n"
+                    initMethod += "        } else {\n"
+                    initMethod += "            self.\(property.name) = nil\n"
+                    initMethod += "        }\n"
+                    
+                } else {
                     initMethod += "        self.\(property.name) = \(property.type)(dictionary:dictionary?[\"\(property.name)\"] as? [String:Any?])\n"
-//                }
+                }
             } else {
                 initMethod += "        self.\(property.name) = dictionary?[\"\(property.name)\"] as? \(property.type)\n"
             }

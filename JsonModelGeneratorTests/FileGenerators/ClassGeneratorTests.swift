@@ -90,4 +90,27 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertEqual(expectedString, testString)
     }
     
+    func testInitWithDictionaryWithCustomTypeArray() {
+        let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
+            "        if let dictionaryArray = dictionary?[\"thing\"] as? [[String:Any?]] {\n" +
+            "            var objectArray = [Monkey]()\n" +
+            "            for d in dictionaryArray {\n" +
+            "                if let object = Monkey(dictionary:d) {\n" +
+            "                    objectArray.append(object)\n" +
+            "                }\n" +
+            "            }\n" +
+            "            self.thing = objectArray\n" +
+            "        } else {\n" +
+            "            self.thing = nil\n" +
+            "        }\n\n" +
+        "    }\n\n"
+        let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]
+        
+        let testString = testObject.createInitWithDictionaryMethod(properties: propertyList)
+        
+        XCTAssertEqual(expectedString, testString)
+    }
+    
+    
+    
 }
