@@ -59,32 +59,13 @@ class ClassGenerator: FileGenerator {
         initMethod += "\n"
         for property in properties {
             if property.isCustomType {
-                if property.isArray {
-                    initMethod += createArrayInitBlock(property: property)
-                } else {
-                    initMethod += "        self.\(property.name) = \(property.type)(dictionary:dictionary?[\"\(property.name)\"] as? [String:Any?])\n"
-                }
+                initMethod += "        self.\(property.name) = CustomPropertyFactory.getObject(type: \(property.arrayType).self, from: dictionary?[\"\(property.name)\"] ?? nil, factory: { (dict) -> (\(property.arrayType)?) in return \(property.arrayType)(dictionary: dict) }) as? \(property.type)\n"
             } else {
                 initMethod += "        self.\(property.name) = dictionary?[\"\(property.name)\"] as? \(property.type)\n"
             }
         }
         initMethod += "\n"
         initMethod += "    }\n\n"
-        return initMethod
-    }
-    
-    func createArrayInitBlock(property: ObjectProperty) -> String {
-        var initMethod = "        if let dictionaryArray = dictionary?[\"\(property.name)\"] as? [[String:Any?]] {\n"
-        initMethod += "            var objectArray = [\(property.arrayType)]()\n"
-        initMethod += "            for d in dictionaryArray {\n"
-        initMethod += "                if let object = \(property.arrayType)(dictionary:d) {\n"
-        initMethod += "                    objectArray.append(object)\n"
-        initMethod += "                }\n"
-        initMethod += "            }\n"
-        initMethod += "            self.\(property.name) = objectArray\n"
-        initMethod += "        } else {\n"
-        initMethod += "            self.\(property.name) = nil\n"
-        initMethod += "        }\n"
         return initMethod
     }
     
@@ -103,17 +84,6 @@ class ClassGenerator: FileGenerator {
         output += "\n"
         output += "        return dictionary\n\n"
         output += "    }\n\n"
-        return output
-    }
-    
-    func createJsonArrayDictionaryBlock(property: ObjectProperty) -> String {
-        var output = "        if let objectArray = self.\(property.name) {\n"
-        output += "            var dictionaryArray = [[String: Any?]]()\n"
-        output += "            for object in objectArray {\n"
-        output += "                dictionaryArray.append(object.jsonDictionary)\n"
-        output += "            }\n"
-        output += "            dictionary[\"\(property.name)\"] = dictionaryArray\n"
-        output += "        }\n"
         return output
     }
     

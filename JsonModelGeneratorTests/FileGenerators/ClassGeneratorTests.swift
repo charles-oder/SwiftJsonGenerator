@@ -80,8 +80,8 @@ class ClassGeneratorTests: XCTestCase {
     
     func testInitWithDictionaryWithCustomTypes() {
         let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
-            "        self.thing = Monkey(dictionary:dictionary?[\"thing\"] as? [String:Any?])\n" +
-            "        self.otherThing = Banana(dictionary:dictionary?[\"otherThing\"] as? [String:Any?])\n\n" +
+            "        self.thing = CustomPropertyFactory.getObject(type: Monkey.self, from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return ResultsModel(dictionary: dict) }) as? Monkey\n" +
+            "        self.otherThing = CustomPropertyFactory.getObject(type: Banana.self, from: dictionary?[\"otherThing\"] ?? nil, factory: { (dict) -> (Banana?) in return ResultsModel(dictionary: dict) }) as? Banana\n\n" +
         "    }\n\n"
         let propertyList = [ObjectProperty(name: "thing", type: "Monkey"), ObjectProperty(name: "otherThing", type: "Banana")]
         
@@ -92,17 +92,7 @@ class ClassGeneratorTests: XCTestCase {
     
     func testInitWithDictionaryWithCustomTypeArray() {
         let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
-            "        if let dictionaryArray = dictionary?[\"thing\"] as? [[String:Any?]] {\n" +
-            "            var objectArray = [Monkey]()\n" +
-            "            for d in dictionaryArray {\n" +
-            "                if let object = Monkey(dictionary:d) {\n" +
-            "                    objectArray.append(object)\n" +
-            "                }\n" +
-            "            }\n" +
-            "            self.thing = objectArray\n" +
-            "        } else {\n" +
-            "            self.thing = nil\n" +
-            "        }\n\n" +
+            "        self.thing = CustomPropertyFactory.getObject(type: Monkey.self, from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return ResultsModel(dictionary: dict) }) as? [Monkey]\n\n" +
         "    }\n\n"
         let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]
         
