@@ -274,36 +274,40 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testGetTypeForStringArray() {
-        let value = ["something"]
+        let testJson = "{\"thing\":[\"something\",\"somethingElse\"]}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("[String]", type.type)
         XCTAssertFalse(type.isCustom)
     }
     
     func testGetTypeForDoubleArray() {
-        let value = [Double(1.1)]
+        let testJson = "{\"thing\":[1.1,2.2]}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("[Double]", type.type)
         XCTAssertFalse(type.isCustom)
     }
     
     func testGetTypeForIntArray() {
-        let value = [Double(1)]
+        let testJson = "{\"thing\":[1,2]}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("[Int]", type.type)
         XCTAssertFalse(type.isCustom)
     }
     
     func testGetTypeForBoolArray() {
-        let value = [true]
+        let testJson = "{\"thing\":[true, false]}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("[Bool]", type.type)
         XCTAssertFalse(type.isCustom)
@@ -320,11 +324,22 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testGetTypeForCustomArray() {
-        let value = [[String:Any?]()]
+        let testJson = "{\"thing\":[{\"otherThing\":\"two\"}]}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("[TSTThingModel]", type.type)
+        XCTAssertTrue(type.isCustom)
+    }
+    
+    func testGetTypeForCustomArrayOfArrays() {
+        let testJson = "{\"thing\":[[{\"otherThing\":\"two\"}]]}"
+        let dictionary = getDictionary(json: testJson)!
+        
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
+        
+        XCTAssertEqual("[[TSTThingModel]]", type.type)
         XCTAssertTrue(type.isCustom)
     }
     

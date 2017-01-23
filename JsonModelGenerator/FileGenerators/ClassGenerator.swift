@@ -139,33 +139,27 @@ class ClassGenerator: FileGenerator {
         
         let typeDescription = String(describing:type(of:value))
         
-        if typeDescription == "__NSSingleEntryDictionaryI" {
+        if typeDescription == "__NSSingleEntryDictionaryI" || typeDescription == "__NSDictionaryI" {
             return (type:self.prefix + key.capitalized + self.suffix, isCustom:true)
+        } else if typeDescription == "__NSSingleObjectArrayI" { // Could be an array of arrays?
+            if let something = (value as? [Any?])?.first {
+                var type = getType(key: key, val: something)
+                type.type = "[\(type.type)]"
+                return type
+            }
         } else if typeDescription == "NSTaggedPointerString" {
             return (type:"String", isCustom:false)
         } else if typeDescription == "__NSCFNumber" {
             return CFNumberIsFloatType(value as! CFNumber) ? (type:"Double", isCustom:false) : (type:"Int", isCustom:false)
         } else if typeDescription == "__NSCFBoolean" {
             return (type:"Bool", isCustom:false)
-        }
-
-        if let _ = val as? [String] {
-            return (type:"[String]", isCustom:false)
-        }
-        if let numArray = val as? [Double] {
-            var type = (type:"[Double]", isCustom:false)
-            for num in numArray {
-                if num.isReallyAnInt {
-                    type = (type:"[Int]", isCustom:false)
-                }
+        }  else if typeDescription == "__NSArrayI" || typeDescription == "__NSSingleObjectArrayI" {
+            if let something = (value as? [Any])?.first {
+                var type = getType(key: key, val: something)
+                type.type = "[\(type.type)]"
+                return type
             }
-            return type
-        }
-        if let _ = val as? [Bool] {
-            return (type:"[Bool]", isCustom:false)
-        }
-        if let _ = val as? [[String: Any?]] {
-            return (type:"[\(self.prefix + key.capitalized + self.suffix)]", isCustom:true)
+            return (type:"Bool", isCustom:false)
         }
         return (type:"Any", isCustom:false)
     }
