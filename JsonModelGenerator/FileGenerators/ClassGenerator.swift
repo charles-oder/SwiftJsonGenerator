@@ -147,7 +147,7 @@ class ClassGenerator: FileGenerator {
                 type.type = "[\(type.type)]"
                 return type
             }
-        } else if typeDescription == "NSTaggedPointerString" {
+        } else if typeDescription == "NSTaggedPointerString" || typeDescription == "__NSCFString" {
             return (type:"String", isCustom:false)
         } else if typeDescription == "__NSCFNumber" {
             return CFNumberIsFloatType(value as! CFNumber) ? (type:"Double", isCustom:false) : (type:"Int", isCustom:false)
@@ -164,11 +164,13 @@ class ClassGenerator: FileGenerator {
         return (type:"Any", isCustom:false)
     }
     
-    func getChildObjectDictionary(value: Any?) ->[String:Any?] {
+    func getChildObjectDictionary(value: Any?) -> [String:Any?] {
         if let dictionary = value as? [String: Any?] {
             return dictionary
         } else if let dictionaryArray = value as? [[String: Any?]] {
             return dictionaryArray.mergedArray
+        } else if let arrayChild = (value as? [Any?])?.first {
+            return getChildObjectDictionary(value: arrayChild)
         }
         return [:]
     }
