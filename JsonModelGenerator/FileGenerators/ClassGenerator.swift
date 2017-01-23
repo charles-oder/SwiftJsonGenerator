@@ -132,15 +132,23 @@ class ClassGenerator: FileGenerator {
     }
     
     func getType(key: String, val: Any?) -> (type:String, isCustom:Bool) {
-        if let _ = val as? String {
+        
+        guard let value = val else {
+            return (type:"Any", isCustom:false)
+        }
+        
+        let typeDescription = String(describing:type(of:value))
+        
+        if typeDescription == "__NSSingleEntryDictionaryI" {
+            return (type:self.prefix + key.capitalized + self.suffix, isCustom:true)
+        } else if typeDescription == "NSTaggedPointerString" {
             return (type:"String", isCustom:false)
-        }
-        if let num = val as? Double {
-            return num.isReallyAnInt ? (type:"Int", isCustom:false) : (type:"Double", isCustom:false)
-        }
-        if let _ = val as? Bool {
+        } else if typeDescription == "__NSCFNumber" {
+            return CFNumberIsFloatType(value as! CFNumber) ? (type:"Double", isCustom:false) : (type:"Int", isCustom:false)
+        } else if typeDescription == "__NSCFBoolean" {
             return (type:"Bool", isCustom:false)
         }
+
         if let _ = val as? [String] {
             return (type:"[String]", isCustom:false)
         }
@@ -155,9 +163,6 @@ class ClassGenerator: FileGenerator {
         }
         if let _ = val as? [Bool] {
             return (type:"[Bool]", isCustom:false)
-        }
-        if let _ = val as? [String: Any?] {
-            return (type:self.prefix + key.capitalized + self.suffix, isCustom:true)
         }
         if let _ = val as? [[String: Any?]] {
             return (type:"[\(self.prefix + key.capitalized + self.suffix)]", isCustom:true)

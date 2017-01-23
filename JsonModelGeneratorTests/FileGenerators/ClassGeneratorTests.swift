@@ -220,36 +220,54 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testGetTypeForString() {
-        let value = "something"
-        
-        let type = testObject.getType(key: "thing", val: value)
+        let testJson = "{\"thing\":\"something\"}"
+        let dictionary = getDictionary(json: testJson)!
+
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("String", type.type)
         XCTAssertFalse(type.isCustom)
     }
     
-    func testGetTypeForDouble() {
-        let value = Double(1.1)
+    func getDictionary(json: String) -> [String: Any?]? {
+        guard let data = json.data(using: .utf8, allowLossyConversion: true) else {
+            XCTFail()
+            return nil
+        }
+        do {
+            return try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any?]
+        } catch {
+            XCTFail()
+        }
+        return nil
         
-        let type = testObject.getType(key: "thing", val: value)
+    }
+    
+    func testGetTypeForDouble() {
+        let testJson = "{\"thing\":1.1}"
+        let dictionary = getDictionary(json: testJson)!
+        
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("Double", type.type)
         XCTAssertFalse(type.isCustom)
     }
     
     func testGetTypeForInt() {
-        let value = Double(1)
+        let testJson = "{\"thing\":1}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("Int", type.type)
         XCTAssertFalse(type.isCustom)
     }
     
     func testGetTypeForBool() {
-        let value = true
+        let testJson = "{\"thing\":true}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("Bool", type.type)
         XCTAssertFalse(type.isCustom)
@@ -292,9 +310,10 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testGetTypeForCustom() {
-        let value = [String:Any?]()
+        let testJson = "{\"thing\":{\"otherThing\":\"two\"}}"
+        let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: value)
+        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
         
         XCTAssertEqual("TSTThingModel", type.type)
         XCTAssertTrue(type.isCustom)
