@@ -60,18 +60,7 @@ class ClassGenerator: FileGenerator {
         for property in properties {
             if property.isCustomType {
                 if property.isArray {
-                    initMethod += "        if let dictionaryArray = dictionary?[\"\(property.name)\"] as? [[String:Any?]] {\n"
-                    initMethod += "            var objectArray = [\(property.arrayType)]()\n"
-                    initMethod += "            for d in dictionaryArray {\n"
-                    initMethod += "                if let object = \(property.arrayType)(dictionary:d) {\n"
-                    initMethod += "                    objectArray.append(object)\n"
-                    initMethod += "                }\n"
-                    initMethod += "            }\n"
-                    initMethod += "            self.\(property.name) = objectArray\n"
-                    initMethod += "        } else {\n"
-                    initMethod += "            self.\(property.name) = nil\n"
-                    initMethod += "        }\n"
-                    
+                    initMethod += createArrayInitBlock(property: property)
                 } else {
                     initMethod += "        self.\(property.name) = \(property.type)(dictionary:dictionary?[\"\(property.name)\"] as? [String:Any?])\n"
                 }
@@ -84,6 +73,21 @@ class ClassGenerator: FileGenerator {
         return initMethod
     }
     
+    func createArrayInitBlock(property: ObjectProperty) -> String {
+        var initMethod = "        if let dictionaryArray = dictionary?[\"\(property.name)\"] as? [[String:Any?]] {\n"
+        initMethod += "            var objectArray = [\(property.arrayType)]()\n"
+        initMethod += "            for d in dictionaryArray {\n"
+        initMethod += "                if let object = \(property.arrayType)(dictionary:d) {\n"
+        initMethod += "                    objectArray.append(object)\n"
+        initMethod += "                }\n"
+        initMethod += "            }\n"
+        initMethod += "            self.\(property.name) = objectArray\n"
+        initMethod += "        } else {\n"
+        initMethod += "            self.\(property.name) = nil\n"
+        initMethod += "        }\n"
+        return initMethod
+    }
+    
     func createJsonDictionaryDefinition(properties:[ObjectProperty]) -> String {
         var output = "    public var jsonDictionary: [String:Any?] {\n"
         output += "\n"
@@ -91,14 +95,7 @@ class ClassGenerator: FileGenerator {
         for property in properties {
             if property.isCustomType {
                 if property.isArray {
-                    output += "        if let objectArray = self.\(property.name) {\n"
-                    output += "            var dictionaryArray = [[String: Any?]]()\n"
-                    output += "            for object in objectArray {\n"
-                    output += "                dictionaryArray.append(object.jsonDictionary)\n"
-                    output += "            }\n"
-                    output += "            dictionary[\"\(property.name)\"] = dictionaryArray\n"
-                    output += "        }\n"
-                    
+                    output += createJsonArrayDictionaryBlock(property: property)
                 } else {
                     output += "        dictionary[\"\(property.name)\"] = self.\(property.name)?.jsonDictionary\n"
                 }
@@ -110,6 +107,17 @@ class ClassGenerator: FileGenerator {
         output += "\n"
         output += "        return dictionary\n\n"
         output += "    }\n\n"
+        return output
+    }
+    
+    func createJsonArrayDictionaryBlock(property: ObjectProperty) -> String {
+        var output = "        if let objectArray = self.\(property.name) {\n"
+        output += "            var dictionaryArray = [[String: Any?]]()\n"
+        output += "            for object in objectArray {\n"
+        output += "                dictionaryArray.append(object.jsonDictionary)\n"
+        output += "            }\n"
+        output += "            dictionary[\"\(property.name)\"] = dictionaryArray\n"
+        output += "        }\n"
         return output
     }
     
