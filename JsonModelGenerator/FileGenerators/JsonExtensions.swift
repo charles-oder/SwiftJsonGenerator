@@ -40,3 +40,38 @@ public extension String {
         }
     }
 }
+
+class CustomPropertyFactory {
+    
+    class func getJsonDictionary(for thing: Any?) -> Any? {
+        if let jsonModel = thing as? JsonModel {
+            return jsonModel.jsonDictionary
+        } else if let objectArray = thing as? [Any] {
+            var output = [Any]()
+            for object in objectArray {
+                if let objectDict = getJsonDictionary(for: object) {
+                    output.append(objectDict)
+                }
+            }
+            return output
+        }
+        return thing
+    }
+    
+    class func getObject<T: JsonModel>(type: T.Type, from: Any?, factory: ([String: Any?])->(T?)) -> Any? {
+        if let dictionary = from as? [String: Any?] {
+            return factory(dictionary)
+        } else if let thingArray = from as? [Any] {
+            var outputArray = [Any]()
+            for item in thingArray {
+                if let object = getObject(type: type, from: item, factory: factory) {
+                    outputArray.append(object)
+                }
+            }
+            return outputArray
+        }
+        return nil
+    }
+    
+}
+

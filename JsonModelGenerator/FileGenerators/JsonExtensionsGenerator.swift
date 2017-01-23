@@ -52,7 +52,42 @@ class JsonExtensionsGenerator: FileGenerator {
             "            return [:]\n" +
             "        }\n" +
             "    }\n" +
-            "}"
+            "}\n\n" +
+            "class CustomPropertyFactory {\n" +
+            "\n" +
+            "    class func getJsonDictionary(for thing: Any?) -> Any? {\n" +
+            "        if let jsonModel = thing as? JsonModel {\n" +
+            "            return jsonModel.jsonDictionary\n" +
+            "        } else if let objectArray = thing as? [Any] {\n" +
+            "            var output = [Any]()\n" +
+            "            for object in objectArray {\n" +
+            "                if let objectDict = getJsonDictionary(for: object) {\n" +
+            "                    output.append(objectDict)\n" +
+            "                }\n" +
+            "            }\n" +
+            "            return output\n" +
+            "        }\n" +
+            "        return thing\n" +
+            "    }\n" +
+            "\n" +
+            "    class func getObject<T: JsonModel>(type: T.Type, from: Any?, factory: ([String: Any?])->(T?)) -> Any? {\n" +
+            "        if let dictionary = from as? [String: Any?] {\n" +
+            "            return factory(dictionary)\n" +
+            "        } else if let thingArray = from as? [Any] {\n" +
+            "            var outputArray = [Any]()\n" +
+            "            for item in thingArray {\n" +
+            "                if let object = getObject(type: type, from: item, factory: factory) {\n" +
+            "                    outputArray.append(object)\n" +
+            "                }\n" +
+            "            }\n" +
+            "            return outputArray\n" +
+            "        }\n" +
+            "        return nil\n" +
+            "    }\n" +
+            "\n" +
+            "}\n"
+        
+
         let fileName = "JsonExtensions.swift"
         try write(body: fileContents, toFile: fileName)
     }
