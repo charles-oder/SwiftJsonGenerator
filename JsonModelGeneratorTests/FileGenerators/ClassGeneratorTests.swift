@@ -128,8 +128,8 @@ class ClassGeneratorTests: XCTestCase {
     func testJsonDictionaryPropertyWithCustomTypes() {
         let expectedString =  "    public var jsonDictionary: [String:Any?] {\n\n" +
             "        var dictionary = [String: Any?]()\n" +
-            "        dictionary[\"thing\"] = self.thing?.jsonDictionary\n" +
-            "        dictionary[\"otherThing\"] = self.otherThing?.jsonDictionary\n\n" +
+            "        dictionary[\"thing\"] = CustomPropertyFactory.getJsonDictionary(for: self.thing)\n" +
+            "        dictionary[\"otherThing\"] = CustomPropertyFactory.getJsonDictionary(for: self.otherThing)\n\n" +
             "        return dictionary\n\n" +
         "    }\n\n"
         let propertyList = [ObjectProperty(name: "thing", type: "Monkey"), ObjectProperty(name: "otherThing", type: "Banana")]
@@ -139,16 +139,10 @@ class ClassGeneratorTests: XCTestCase {
         XCTAssertEqual(expectedString, testString)
     }
     
-    func testJsonDictionaryPropertyWithCustomTypeArray() {
+    func testJsonDictionaryPropertyWithCustomTypeArrayOfArrays() {
         let expectedString =  "    public var jsonDictionary: [String:Any?] {\n\n" +
             "        var dictionary = [String: Any?]()\n" +
-            "        if let objectArray = self.thing {\n" +
-            "            var dictionaryArray = [[String: Any?]]()\n" +
-            "            for object in objectArray {\n" +
-            "                dictionaryArray.append(object.jsonDictionary)\n" +
-            "            }\n" +
-            "            dictionary[\"thing\"] = dictionaryArray\n" +
-            "        }\n\n" +
+            "        dictionary[\"thing\"] = CustomPropertyFactory.getJsonDictionary(for: self.thing)\n\n" +
             "        return dictionary\n\n" +
         "    }\n\n"
         let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]

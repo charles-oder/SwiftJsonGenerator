@@ -94,11 +94,7 @@ class ClassGenerator: FileGenerator {
         output += "        var dictionary = [String: Any?]()\n"
         for property in properties {
             if property.isCustomType {
-                if property.isArray {
-                    output += createJsonArrayDictionaryBlock(property: property)
-                } else {
-                    output += "        dictionary[\"\(property.name)\"] = self.\(property.name)?.jsonDictionary\n"
-                }
+                output += "        dictionary[\"\(property.name)\"] = CustomPropertyFactory.getJsonDictionary(for: self.\(property.name))\n"
             } else {
                 output += "        dictionary[\"\(property.name)\"] = self.\(property.name)\n"
             }
