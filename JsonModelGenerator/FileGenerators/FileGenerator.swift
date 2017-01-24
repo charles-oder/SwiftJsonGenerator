@@ -17,8 +17,9 @@ class FileGenerator {
     }
     
     func write(body: String, toFile: String) throws {
+        let folderUrl = URL(fileURLWithPath: fileLocation, isDirectory: true)
         let url = URL(fileURLWithPath: fileLocation + toFile)
+        try FileManager.default.createDirectory(at: folderUrl, withIntermediateDirectories: true, attributes: nil)
         try body.data(using: .utf8, allowLossyConversion: true)?.write(to: url)
     }
-
 }

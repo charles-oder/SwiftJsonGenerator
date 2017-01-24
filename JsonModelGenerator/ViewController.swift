@@ -59,7 +59,7 @@ class ViewController: NSViewController {
         do {
             try classGenerator.buildModelFile(dict: dict!, className: baseClassNameField.stringValue)
         } catch {
-            showError(title: "Error", message: "Unable to generate class files")
+            showError(title: "Error", message: "Unable to generate class files: \(error.localizedDescription)")
             return
         }
         
