@@ -80,8 +80,8 @@ class ClassGeneratorTests: XCTestCase {
     
     func testInitWithDictionaryWithCustomTypes() {
         let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
-            "        self.thing = CustomPropertyFactory.getObject(type: Monkey.self, from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? Monkey\n" +
-            "        self.otherThing = CustomPropertyFactory.getObject(type: Banana.self, from: dictionary?[\"otherThing\"] ?? nil, factory: { (dict) -> (Banana?) in return Banana(dictionary: dict) }) as? Banana\n\n" +
+            "        self.thing = CustomPropertyFactory.getObject(from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? Monkey\n" +
+            "        self.otherThing = CustomPropertyFactory.getObject(from: dictionary?[\"otherThing\"] ?? nil, factory: { (dict) -> (Banana?) in return Banana(dictionary: dict) }) as? Banana\n\n" +
         "    }\n\n"
         let propertyList = [ObjectProperty(name: "thing", type: "Monkey"), ObjectProperty(name: "otherThing", type: "Banana")]
         
@@ -92,7 +92,7 @@ class ClassGeneratorTests: XCTestCase {
     
     func testInitWithDictionaryWithCustomTypeArray() {
         let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
-            "        self.thing = CustomPropertyFactory.getObject(type: Monkey.self, from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? [Monkey]\n\n" +
+            "        self.thing = CustomPropertyFactory.getObject(from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? [Monkey]\n\n" +
         "    }\n\n"
         let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]
         

@@ -70,13 +70,13 @@ class JsonExtensionsGenerator: FileGenerator {
             "        return thing\n" +
             "    }\n" +
             "\n" +
-            "    class func getObject<T: JsonModel>(type: T.Type, from: Any?, factory: ([String: Any?])->(T?)) -> Any? {\n" +
+            "    class func getObject<T: JsonModel>(from: Any?, factory: ([String: Any?])->(T?)) -> Any? {\n" +
             "        if let dictionary = from as? [String: Any?] {\n" +
             "            return factory(dictionary)\n" +
             "        } else if let thingArray = from as? [Any] {\n" +
             "            var outputArray = [Any]()\n" +
             "            for item in thingArray {\n" +
-            "                if let object = getObject(type: type, from: item, factory: factory) {\n" +
+            "                if let object = getObject(from: item, factory: factory) {\n" +
             "                    outputArray.append(object)\n" +
             "                }\n" +
             "            }\n" +

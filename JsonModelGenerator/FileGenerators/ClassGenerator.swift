@@ -59,7 +59,7 @@ class ClassGenerator: FileGenerator {
         initMethod += "\n"
         for property in properties {
             if property.isCustomType {
-                initMethod += "        self.\(property.name) = CustomPropertyFactory.getObject(type: \(property.arrayType).self, from: dictionary?[\"\(property.name)\"] ?? nil, factory: { (dict) -> (\(property.arrayType)?) in return \(property.arrayType)(dictionary: dict) }) as? \(property.type)\n"
+                initMethod += "        self.\(property.name) = CustomPropertyFactory.getObject(from: dictionary?[\"\(property.name)\"] ?? nil, factory: { (dict) -> (\(property.arrayType)?) in return \(property.arrayType)(dictionary: dict) }) as? \(property.type)\n"
             } else {
                 initMethod += "        self.\(property.name) = dictionary?[\"\(property.name)\"] as? \(property.type)\n"
             }

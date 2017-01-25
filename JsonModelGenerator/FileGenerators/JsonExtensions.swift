@@ -58,13 +58,13 @@ class CustomPropertyFactory {
         return thing
     }
     
-    class func getObject<T: JsonModel>(type: T.Type, from: Any?, factory: ([String: Any?])->(T?)) -> Any? {
+    class func getObject<T: JsonModel>(from: Any?, factory: ([String: Any?])->(T?)) -> Any? {
         if let dictionary = from as? [String: Any?] {
             return factory(dictionary)
         } else if let thingArray = from as? [Any] {
             var outputArray = [Any]()
             for item in thingArray {
-                if let object = getObject(type: type, from: item, factory: factory) {
+                if let object = getObject(from: item, factory: factory) {
                     outputArray.append(object)
                 }
             }
