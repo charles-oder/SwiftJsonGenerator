@@ -108,7 +108,7 @@
 			children = (
 				E1642CC01E38F8CA00D1F5B9 /* JsonExtensions.txt */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E1E09D771E314365002A3092 = {

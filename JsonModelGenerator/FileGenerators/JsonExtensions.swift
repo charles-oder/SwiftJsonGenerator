@@ -1,7 +1,7 @@
 // JsonExtensions.swift
 
 // Do not add multiple copies of this generated file to your project
-// Generated 2017-01-20 03:34:35 +0000
+// Generated {{DATE}}
 import Foundation
 
 public protocol JsonModel {
