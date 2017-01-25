@@ -16,6 +16,7 @@
 		E114C9201E324DA500C172EB /* JsonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C91F1E324DA500C172EB /* JsonExtensions.swift */; };
 		E114C9231E324E0200C172EB /* JsonExtensionsGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C9221E324E0200C172EB /* JsonExtensionsGeneratorTests.swift */; };
 		E114C9251E3250DA00C172EB /* JsonExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C9241E3250DA00C172EB /* JsonExtensionsTests.swift */; };
+		E1642CC11E38F8CA00D1F5B9 /* JsonExtensions.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1642CC01E38F8CA00D1F5B9 /* JsonExtensions.txt */; };
 		E189BB701E326028003E2017 /* ClassGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB6F1E326028003E2017 /* ClassGenerator.swift */; };
 		E189BB721E32606C003E2017 /* ClassGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB711E32606C003E2017 /* ClassGeneratorTests.swift */; };
 		E189BB741E32641B003E2017 /* TestFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189BB731E32641B003E2017 /* TestFileManager.swift */; };
@@ -47,6 +48,7 @@
 		E114C91F1E324DA500C172EB /* JsonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonExtensions.swift; sourceTree = "<group>"; };
 		E114C9221E324E0200C172EB /* JsonExtensionsGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonExtensionsGeneratorTests.swift; sourceTree = "<group>"; };
 		E114C9241E3250DA00C172EB /* JsonExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonExtensionsTests.swift; sourceTree = "<group>"; };
+		E1642CC01E38F8CA00D1F5B9 /* JsonExtensions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JsonExtensions.txt; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E189BB6F1E326028003E2017 /* ClassGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassGenerator.swift; sourceTree = "<group>"; };
 		E189BB711E32606C003E2017 /* ClassGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassGeneratorTests.swift; sourceTree = "<group>"; };
 		E189BB731E32641B003E2017 /* TestFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFileManager.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 			path = FileGenerators;
 			sourceTree = "<group>";
 		};
+		E1642CBF1E38F8AC00D1F5B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E1642CC01E38F8CA00D1F5B9 /* JsonExtensions.txt */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E1E09D771E314365002A3092 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +132,7 @@
 		E1E09D821E314365002A3092 /* JsonModelGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				E1642CBF1E38F8AC00D1F5B9 /* Resources */,
 				E114C91A1E31BE1B00C172EB /* FileGenerators */,
 				E1E09D831E314365002A3092 /* AppDelegate.swift */,
 				E1E09D851E314365002A3092 /* ViewController.swift */,
@@ -233,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1E09D881E314365002A3092 /* Assets.xcassets in Resources */,
+				E1642CC11E38F8CA00D1F5B9 /* JsonExtensions.txt in Resources */,
 				E1E09D8B1E314365002A3092 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
