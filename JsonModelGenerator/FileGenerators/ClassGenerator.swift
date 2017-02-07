@@ -55,7 +55,7 @@ class ClassGenerator: FileGenerator {
     }
     
     func createInitWithDictionaryMethod(properties:[ObjectProperty]) -> String {
-        var initMethod = "    public init?(dictionary:[String: Any?]?) {\n"
+        var initMethod = "    public init?(dictionary: [String: Any?]?) {\n"
         initMethod += "\n"
         for property in properties {
             if property.isCustomType {

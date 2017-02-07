@@ -67,7 +67,7 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testInitWithDictionaryWithPrimitiveTypes() {
-        let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
+        let expectedString =  "    public init?(dictionary: [String: Any?]?) {\n\n" +
             "        self.thing = dictionary?[\"thing\"] as? String\n" +
             "        self.otherThing = dictionary?[\"otherThing\"] as? Int\n\n" +
         "    }\n\n"
@@ -79,7 +79,7 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testInitWithDictionaryWithCustomTypes() {
-        let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
+        let expectedString =  "    public init?(dictionary: [String: Any?]?) {\n\n" +
             "        self.thing = CustomPropertyFactory.getObject(from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? Monkey\n" +
             "        self.otherThing = CustomPropertyFactory.getObject(from: dictionary?[\"otherThing\"] ?? nil, factory: { (dict) -> (Banana?) in return Banana(dictionary: dict) }) as? Banana\n\n" +
         "    }\n\n"
@@ -91,7 +91,7 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testInitWithDictionaryWithCustomTypeArray() {
-        let expectedString =  "    public init?(dictionary:[String: Any?]?) {\n\n" +
+        let expectedString =  "    public init?(dictionary: [String: Any?]?) {\n\n" +
             "        self.thing = CustomPropertyFactory.getObject(from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? [Monkey]\n\n" +
         "    }\n\n"
         let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]
@@ -167,7 +167,7 @@ class ClassGeneratorTests: XCTestCase {
         "        self.thing = thing\n" +
         "    }\n" +
         "\n" +
-        "    public init?(dictionary:[String: Any?]?) {\n" +
+        "    public init?(dictionary: [String: Any?]?) {\n" +
         "\n" +
         "        self.thing = dictionary?[\"thing\"] as? String\n" +
         "\n" +
