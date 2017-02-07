@@ -59,9 +59,9 @@ class ClassGenerator: FileGenerator {
         initMethod += "\n"
         for property in properties {
             if property.isCustomType {
-                initMethod += "        self.\(property.name) = CustomPropertyFactory.getObject(from: dictionary?[\"\(property.name)\"] ?? nil, factory: { (dict) -> (\(property.arrayType)?) in return \(property.arrayType)(dictionary: dict) }) as? \(property.type)\n"
+                initMethod += "        self.\(property.name) = CustomPropertyFactory.getObject(from: dictionary?[\"\(property.key)\"] ?? nil, factory: { (dict) -> (\(property.arrayType)?) in return \(property.arrayType)(dictionary: dict) }) as? \(property.type)\n"
             } else {
-                initMethod += "        self.\(property.name) = dictionary?[\"\(property.name)\"] as? \(property.type)\n"
+                initMethod += "        self.\(property.name) = dictionary?[\"\(property.key)\"] as? \(property.type)\n"
             }
         }
         initMethod += "\n"
@@ -75,9 +75,9 @@ class ClassGenerator: FileGenerator {
         output += "        var dictionary = [String: Any?]()\n"
         for property in properties {
             if property.isCustomType {
-                output += "        dictionary[\"\(property.name)\"] = CustomPropertyFactory.getJsonDictionary(for: self.\(property.name))\n"
+                output += "        dictionary[\"\(property.key)\"] = CustomPropertyFactory.getJsonDictionary(for: self.\(property.name))\n"
             } else {
-                output += "        dictionary[\"\(property.name)\"] = self.\(property.name)\n"
+                output += "        dictionary[\"\(property.key)\"] = self.\(property.name)\n"
             }
             
         }
@@ -114,7 +114,7 @@ class ClassGenerator: FileGenerator {
         let typeDescription = String(describing:type(of:value))
         
         if typeDescription == "__NSSingleEntryDictionaryI" || typeDescription == "__NSDictionaryI" {
-            return (type:self.prefix + key.capitalized + self.suffix, isCustom:true)
+            return (type:self.prefix + key.scrubbedClassName + self.suffix, isCustom:true)
         } else if typeDescription == "__NSSingleObjectArrayI" { // Could be an array of arrays?
             if let something = (value as? [Any?])?.first {
                 var type = getType(key: key, val: something)
@@ -166,9 +166,9 @@ class ClassGenerator: FileGenerator {
         for (key, val) in dict {
             let type = getType(key: key, val: val)
             if type.isCustom {
-                try buildModelFile(dict: getChildObjectDictionary(value: val), className: key.capitalized)
+                try buildModelFile(dict: getChildObjectDictionary(value: val), className: key.scrubbedClassName)
             }
-            properties.append(ObjectProperty(name: key, type: type.type))
+            properties.append(ObjectProperty(key: key, type: type.type))
         }
         
         try createFile(className: className, properties: properties)

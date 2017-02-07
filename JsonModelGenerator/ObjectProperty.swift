@@ -9,7 +9,7 @@
 import Foundation
 
 struct ObjectProperty {
-    let name: String
+    let key: String
     let type: String
 }
 
@@ -25,6 +25,10 @@ extension ObjectProperty {
     
     var arrayType: String {
         return type.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
+    }
+    
+    var name: String {
+        return key.scrubbedProperyName
     }
     
 }

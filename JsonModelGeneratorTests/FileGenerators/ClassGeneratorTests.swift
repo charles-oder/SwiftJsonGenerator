@@ -44,7 +44,7 @@ class ClassGeneratorTests: XCTestCase {
     
     func testPropertyList() {
         let expectedList = "    public let thing: String?\n    public let otherThing: Int?\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "String"), ObjectProperty(name: "otherThing", type: "Int")]
+        let propertyList = [ObjectProperty(key: "thing", type: "String"), ObjectProperty(key: "otherThing", type: "Int")]
         
         let testString = testObject.createPropertyList(properties: propertyList)
         
@@ -59,7 +59,7 @@ class ClassGeneratorTests: XCTestCase {
                             "        self.thing = thing\n" +
                             "        self.otherThing = otherThing\n" +
                             "    }\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "String"), ObjectProperty(name: "otherThing", type: "Int")]
+        let propertyList = [ObjectProperty(key: "thing", type: "String"), ObjectProperty(key: "otherThing", type: "Int")]
         
         let testString = testObject.createInitWithPropertyArgs(properties: propertyList)
         
@@ -71,7 +71,7 @@ class ClassGeneratorTests: XCTestCase {
             "        self.thing = dictionary?[\"thing\"] as? String\n" +
             "        self.otherThing = dictionary?[\"otherThing\"] as? Int\n\n" +
         "    }\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "String"), ObjectProperty(name: "otherThing", type: "Int")]
+        let propertyList = [ObjectProperty(key: "thing", type: "String"), ObjectProperty(key: "otherThing", type: "Int")]
         
         let testString = testObject.createInitWithDictionaryMethod(properties: propertyList)
         
@@ -83,7 +83,7 @@ class ClassGeneratorTests: XCTestCase {
             "        self.thing = CustomPropertyFactory.getObject(from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? Monkey\n" +
             "        self.otherThing = CustomPropertyFactory.getObject(from: dictionary?[\"otherThing\"] ?? nil, factory: { (dict) -> (Banana?) in return Banana(dictionary: dict) }) as? Banana\n\n" +
         "    }\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "Monkey"), ObjectProperty(name: "otherThing", type: "Banana")]
+        let propertyList = [ObjectProperty(key: "thing", type: "Monkey"), ObjectProperty(key: "otherThing", type: "Banana")]
         
         let testString = testObject.createInitWithDictionaryMethod(properties: propertyList)
         
@@ -94,7 +94,7 @@ class ClassGeneratorTests: XCTestCase {
         let expectedString =  "    public init?(dictionary: [String: Any?]?) {\n\n" +
             "        self.thing = CustomPropertyFactory.getObject(from: dictionary?[\"thing\"] ?? nil, factory: { (dict) -> (Monkey?) in return Monkey(dictionary: dict) }) as? [Monkey]\n\n" +
         "    }\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]
+        let propertyList = [ObjectProperty(key: "thing", type: "[Monkey]")]
         
         let testString = testObject.createInitWithDictionaryMethod(properties: propertyList)
         
@@ -108,7 +108,7 @@ class ClassGeneratorTests: XCTestCase {
             "        dictionary[\"otherThing\"] = self.otherThing\n\n" +
             "        return dictionary\n\n" +
         "    }\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "String"), ObjectProperty(name: "otherThing", type: "Int")]
+        let propertyList = [ObjectProperty(key: "thing", type: "String"), ObjectProperty(key: "otherThing", type: "Int")]
         
         let testString = testObject.createJsonDictionaryDefinition(properties: propertyList)
         
@@ -122,7 +122,7 @@ class ClassGeneratorTests: XCTestCase {
             "        dictionary[\"otherThing\"] = CustomPropertyFactory.getJsonDictionary(for: self.otherThing)\n\n" +
             "        return dictionary\n\n" +
         "    }\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "Monkey"), ObjectProperty(name: "otherThing", type: "Banana")]
+        let propertyList = [ObjectProperty(key: "thing", type: "Monkey"), ObjectProperty(key: "otherThing", type: "Banana")]
         
         let testString = testObject.createJsonDictionaryDefinition(properties: propertyList)
         
@@ -135,7 +135,7 @@ class ClassGeneratorTests: XCTestCase {
             "        dictionary[\"thing\"] = CustomPropertyFactory.getJsonDictionary(for: self.thing)\n\n" +
             "        return dictionary\n\n" +
         "    }\n\n"
-        let propertyList = [ObjectProperty(name: "thing", type: "[Monkey]")]
+        let propertyList = [ObjectProperty(key: "thing", type: "[Monkey]")]
         
         let testString = testObject.createJsonDictionaryDefinition(properties: propertyList)
         
@@ -152,39 +152,92 @@ class ClassGeneratorTests: XCTestCase {
     
     func testCreateClassFile() {
         let expectedPrefix = "// TestModel.swift\n" +
-        "// Created by SwiftJsonGenerator https://github.com/charles-oder/SwiftJsonGenerator\n" +
+            "// Created by SwiftJsonGenerator https://github.com/charles-oder/SwiftJsonGenerator\n" +
         "// Generated "
         let expectedSuffix = "\n" +
-        "import Foundation\n" +
-        "\n" +
-        "public struct TestModel: JsonModel {\n" +
-        "\n" +
-        "    public let thing: String?\n" +
-        "\n" +
-        "    public init(\n" +
-        "                thing: String?\n" +
-        "                ) {\n" +
-        "        self.thing = thing\n" +
-        "    }\n" +
-        "\n" +
-        "    public init?(dictionary: [String: Any?]?) {\n" +
-        "\n" +
-        "        self.thing = dictionary?[\"thing\"] as? String\n" +
-        "\n" +
-        "    }\n" +
-        "\n" +
-        "    public var jsonDictionary: [String:Any?] {\n" +
-        "\n" +
-        "        var dictionary = [String: Any?]()\n" +
-        "        dictionary[\"thing\"] = self.thing\n" +
-        "\n" +
-        "        return dictionary\n" +
-        "\n" +
-        "    }\n" +
-        "\n" +
+            "import Foundation\n" +
+            "\n" +
+            "public struct TestModel: JsonModel {\n" +
+            "\n" +
+            "    public let thing: String?\n" +
+            "\n" +
+            "    public init(\n" +
+            "                thing: String?\n" +
+            "                ) {\n" +
+            "        self.thing = thing\n" +
+            "    }\n" +
+            "\n" +
+            "    public init?(dictionary: [String: Any?]?) {\n" +
+            "\n" +
+            "        self.thing = dictionary?[\"thing\"] as? String\n" +
+            "\n" +
+            "    }\n" +
+            "\n" +
+            "    public var jsonDictionary: [String:Any?] {\n" +
+            "\n" +
+            "        var dictionary = [String: Any?]()\n" +
+            "        dictionary[\"thing\"] = self.thing\n" +
+            "\n" +
+            "        return dictionary\n" +
+            "\n" +
+            "    }\n" +
+            "\n" +
         "}\n"
         
-        let propertyList = [ObjectProperty(name: "thing", type: "String")]
+        let propertyList = [ObjectProperty(key: "thing", type: "String")]
+        
+        do {
+            try testObject.createFile(className: "TestModel", properties: propertyList)
+        } catch {
+            XCTFail("Failed to create file")
+        }
+        
+        var testFile: String?
+        do {
+            testFile = try String(contentsOf: URL(fileURLWithPath: "/tmp/TestModel.swift"))
+        } catch {
+            XCTFail("Test file not found")
+        }
+        
+        XCTAssertTrue(testFile?.hasPrefix(expectedPrefix) == true)
+        XCTAssertTrue(testFile?.hasSuffix(expectedSuffix) == true)
+    }
+    
+    func testCreateClassFileWithUnderscoreProperties() {
+        let expectedPrefix = "// TestModel.swift\n" +
+            "// Created by SwiftJsonGenerator https://github.com/charles-oder/SwiftJsonGenerator\n" +
+        "// Generated "
+        let expectedSuffix = "\n" +
+            "import Foundation\n" +
+            "\n" +
+            "public struct TestModel: JsonModel {\n" +
+            "\n" +
+            "    public let theThing: String?\n" +
+            "\n" +
+            "    public init(\n" +
+            "                theThing: String?\n" +
+            "                ) {\n" +
+            "        self.theThing = theThing\n" +
+            "    }\n" +
+            "\n" +
+            "    public init?(dictionary: [String: Any?]?) {\n" +
+            "\n" +
+            "        self.theThing = dictionary?[\"the_thing\"] as? String\n" +
+            "\n" +
+            "    }\n" +
+            "\n" +
+            "    public var jsonDictionary: [String:Any?] {\n" +
+            "\n" +
+            "        var dictionary = [String: Any?]()\n" +
+            "        dictionary[\"the_thing\"] = self.theThing\n" +
+            "\n" +
+            "        return dictionary\n" +
+            "\n" +
+            "    }\n" +
+            "\n" +
+        "}\n"
+        
+        let propertyList = [ObjectProperty(key: "the_thing", type: "String")]
         
         do {
             try testObject.createFile(className: "TestModel", properties: propertyList)
