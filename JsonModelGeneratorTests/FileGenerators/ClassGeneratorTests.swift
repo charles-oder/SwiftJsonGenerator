@@ -361,10 +361,10 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testGetTypeForCustomArray() {
-        let testJson = "{\"thing\":[{\"otherThing\":\"two\"}]}"
+        let testJson = "{\"things\":[{\"otherThing\":\"two\"}]}"
         let dictionary = getDictionary(json: testJson)!
         
-        let type = testObject.getType(key: "thing", val: dictionary["thing"]!)
+        let type = testObject.getType(key: "things", val: dictionary["things"]!)
         
         XCTAssertEqual("[TSTThingModel]", type.type)
         XCTAssertTrue(type.isCustom)
@@ -425,7 +425,7 @@ class ClassGeneratorTests: XCTestCase {
             XCTAssertTrue(base.contains("public let anIntArray: [Int]?"))
             XCTAssertTrue(base.contains("public let aBoolArray: [Bool]?"))
             XCTAssertTrue(base.contains("public let monkey: TSTMonkeyModel?"))
-            XCTAssertTrue(base.contains("public let bananas: [TSTBananasModel]?"))
+            XCTAssertTrue(base.contains("public let bananas: [TSTBananaModel]?"))
         } catch {
             XCTFail("No base file found")
         }

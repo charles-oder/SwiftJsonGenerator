@@ -105,7 +105,7 @@ class ClassGenerator: FileGenerator {
         try write(body: fileContents, toFile: fileName)
     }
     
-    func getType(key: String, val: Any?) -> (type:String, isCustom:Bool) {
+    func getType(key: String, val: Any?, scrubPlural: Bool = false) -> (type:String, isCustom:Bool) {
         
         guard let value = val else {
             return (type:"Any", isCustom:false)
@@ -114,10 +114,11 @@ class ClassGenerator: FileGenerator {
         let typeDescription = String(describing:type(of:value))
         
         if typeDescription == "__NSSingleEntryDictionaryI" || typeDescription == "__NSDictionaryI" {
-            return (type:self.prefix + key.scrubbedClassName + self.suffix, isCustom:true)
+            let rawType = scrubPlural ? key.scrubbedClassName.removePlural : key.scrubbedClassName
+            return (type:self.prefix + rawType + self.suffix, isCustom:true)
         } else if typeDescription == "__NSSingleObjectArrayI" { // Could be an array of arrays?
             if let something = (value as? [Any?])?.first {
-                var type = getType(key: key, val: something)
+                var type = getType(key: key, val: something, scrubPlural: true)
                 type.type = "[\(type.type)]"
                 return type
             }
