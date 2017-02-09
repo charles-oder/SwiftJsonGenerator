@@ -15,7 +15,7 @@ extension String {
         var output = ""
         for item in components {
             if !item.isEmpty {
-                output.append(output.isEmpty ? item : item.capitalized)
+                output.append(output.isEmpty ? item : item.firstLetterCapitalized)
             }
         }
         return output
@@ -26,10 +26,16 @@ extension String {
         var output = ""
         for item in components {
             if !item.isEmpty {
-                output.append(item.capitalized)
+                output.append(item.firstLetterCapitalized)
             }
         }
         return output
     }
     
+    var firstLetterCapitalized: String {
+        let first = String(characters.prefix(1)).capitalized
+        let other = String(characters.dropFirst())
+        return first + other
+
+    }
 }
