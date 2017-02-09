@@ -38,4 +38,11 @@ extension String {
         return first + other
 
     }
+    
+    var removePlural: String {
+        if hasSuffix("s") {
+            return String(characters.dropLast())
+        }
+        return self
+    }
 }

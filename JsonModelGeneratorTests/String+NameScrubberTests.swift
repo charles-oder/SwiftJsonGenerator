@@ -35,4 +35,15 @@ class String_NameScrubberTests: XCTestCase {
         XCTAssertEqual("testObject", testObject)
     }
     
+    func testRemovePluralForPluralName() {
+        let testObject = "testObjects".removePlural
+        
+        XCTAssertEqual("testObject", testObject)
+    }
+    
+    func testRemovePluralForNonPluralName() {
+        let testObject = "testObject".removePlural
+        
+        XCTAssertEqual("testObject", testObject)
+    }
 }
