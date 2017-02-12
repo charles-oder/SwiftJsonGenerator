@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		E12DBBD61E4FDD1C00FE80B3 /* BuildResources */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E12DBBD91E4FDD1C00FE80B3 /* Build configuration list for PBXAggregateTarget "BuildResources" */;
+			buildPhases = (
+				E12DBBDA1E4FDD2600FE80B3 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = BuildResources;
+			productName = BuildResources;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		E114C8F51E31AFBE00C172EB /* ObjectProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8F41E31AFBE00C172EB /* ObjectProperty.swift */; };
 		E114C8F71E31B67100C172EB /* Double+IntCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114C8F61E31B67100C172EB /* Double+IntCheck.swift */; };
@@ -31,6 +45,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E12DBBDB1E4FDD4900FE80B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1E09D781E314365002A3092 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E12DBBD61E4FDD1C00FE80B3;
+			remoteInfo = BuildResources;
+		};
 		E1E09D921E314365002A3092 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E1E09D781E314365002A3092 /* Project object */;
@@ -179,6 +200,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E12DBBDC1E4FDD4900FE80B3 /* PBXTargetDependency */,
 			);
 			name = JsonModelGenerator;
 			productName = JsonModelGenerator;
@@ -212,6 +234,11 @@
 				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				TargetAttributes = {
+					E12DBBD61E4FDD1C00FE80B3 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = H5BA38B5ND;
+						ProvisioningStyle = Automatic;
+					};
 					E1E09D7F1E314365002A3092 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = LBQJS63JZK;
@@ -240,6 +267,7 @@
 			targets = (
 				E1E09D7F1E314365002A3092 /* JsonModelGenerator */,
 				E1E09D901E314365002A3092 /* JsonModelGeneratorTests */,
+				E12DBBD61E4FDD1C00FE80B3 /* BuildResources */,
 			);
 		};
 /* End PBXProject section */
@@ -263,6 +291,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E12DBBDA1E4FDD2600FE80B3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cat JsonModelGenerator/FileGenerators/JsonExtensions.swift > JsonModelGenerator/Resources/JsonExtensions.txt";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E1E09D7C1E314365002A3092 /* Sources */ = {
@@ -300,6 +344,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E12DBBDC1E4FDD4900FE80B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E12DBBD61E4FDD1C00FE80B3 /* BuildResources */;
+			targetProxy = E12DBBDB1E4FDD4900FE80B3 /* PBXContainerItemProxy */;
+		};
 		E1E09D931E314365002A3092 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E1E09D7F1E314365002A3092 /* JsonModelGenerator */;
@@ -319,6 +368,22 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E12DBBD71E4FDD1C00FE80B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = H5BA38B5ND;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E12DBBD81E4FDD1C00FE80B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = H5BA38B5ND;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		E1E09D981E314365002A3092 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -472,6 +537,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E12DBBD91E4FDD1C00FE80B3 /* Build configuration list for PBXAggregateTarget "BuildResources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E12DBBD71E4FDD1C00FE80B3 /* Debug */,
+				E12DBBD81E4FDD1C00FE80B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		E1E09D7B1E314365002A3092 /* Build configuration list for PBXProject "JsonModelGenerator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
