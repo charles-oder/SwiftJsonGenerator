@@ -167,7 +167,7 @@ class ClassGenerator: FileGenerator {
         for (key, val) in dict {
             let type = getType(key: key, val: val)
             if type.isCustom {
-                try buildModelFile(dict: getChildObjectDictionary(value: val), className: key.scrubbedClassName)
+                try buildModelFile(dict: getChildObjectDictionary(value: val), className: key.scrubbedClassName.removePlural)
             }
             properties.append(ObjectProperty(key: key, type: type.type))
         }
