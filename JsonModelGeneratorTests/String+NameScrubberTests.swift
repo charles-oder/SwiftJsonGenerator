@@ -64,6 +64,7 @@ class String_NameScrubberTests: XCTestCase {
         XCTAssertEqual("testDeer", "testDeer".removePlural)
         XCTAssertEqual("testAircraft", "testAircraft".removePlural)
         XCTAssertEqual("testRadius", "testRadii".removePlural)
+        XCTAssertEqual("testStatus", "testStatus".removePlural)
     }
     
     func testRemovePluralForNonPluralNameEndingInS() {

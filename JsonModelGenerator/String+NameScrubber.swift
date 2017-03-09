@@ -40,6 +40,9 @@ extension String {
     }
     
     var removePlural: String {
+        if lowercased().hasSuffix("status") {
+            return self
+        }
         if lowercased().hasSuffix("news") {
             return self
         }

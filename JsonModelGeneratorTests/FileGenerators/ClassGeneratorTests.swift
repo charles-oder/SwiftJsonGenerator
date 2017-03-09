@@ -436,7 +436,7 @@ class ClassGeneratorTests: XCTestCase {
             XCTFail("No monkey found")
         }
         do {
-            let bananas = try String(contentsOfFile: "/tmp/TSTBananasModel.swift")
+            let bananas = try String(contentsOfFile: "/tmp/TSTBananaModel.swift")
             XCTAssertTrue(bananas.contains("public var thing: String?"))
             XCTAssertTrue(bananas.contains("public var anotherThing: Int?"))
         } catch {
