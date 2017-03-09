@@ -35,7 +35,7 @@ class ClassGenerator: FileGenerator {
     func createPropertyList(properties:[ObjectProperty]) -> String {
         var propList = ""
         for property in properties {
-            propList += "    public let \(property.name): \(property.type)?\n"
+            propList += "    public var \(property.name): \(property.type)?\n"
         }
         propList += "\n"
         return propList

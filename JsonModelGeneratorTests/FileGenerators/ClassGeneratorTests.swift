@@ -43,7 +43,7 @@ class ClassGeneratorTests: XCTestCase {
     }
     
     func testPropertyList() {
-        let expectedList = "    public let thing: String?\n    public let otherThing: Int?\n\n"
+        let expectedList = "    public var thing: String?\n    public var otherThing: Int?\n\n"
         let propertyList = [ObjectProperty(key: "thing", type: "String"), ObjectProperty(key: "otherThing", type: "Int")]
         
         let testString = testObject.createPropertyList(properties: propertyList)
@@ -159,7 +159,7 @@ class ClassGeneratorTests: XCTestCase {
             "\n" +
             "public struct TestModel: JsonModel {\n" +
             "\n" +
-            "    public let thing: String?\n" +
+            "    public var thing: String?\n" +
             "\n" +
             "    public init(\n" +
             "                thing: String?\n" +
@@ -212,7 +212,7 @@ class ClassGeneratorTests: XCTestCase {
             "\n" +
             "public struct TestModel: JsonModel {\n" +
             "\n" +
-            "    public let theThing: String?\n" +
+            "    public var theThing: String?\n" +
             "\n" +
             "    public init(\n" +
             "                theThing: String?\n" +
@@ -416,29 +416,29 @@ class ClassGeneratorTests: XCTestCase {
         
         do {
             let base = try String(contentsOfFile: "/tmp/TSTBaseModel.swift")
-            XCTAssertTrue(base.contains("public let aString: String?"))
-            XCTAssertTrue(base.contains("public let aDouble: Double?"))
-            XCTAssertTrue(base.contains("public let anInt: Int?"))
-            XCTAssertTrue(base.contains("public let aBool: Bool?"))
-            XCTAssertTrue(base.contains("public let aStringArray: [String]?"))
-            XCTAssertTrue(base.contains("public let aDoubleArray: [Double]?"))
-            XCTAssertTrue(base.contains("public let anIntArray: [Int]?"))
-            XCTAssertTrue(base.contains("public let aBoolArray: [Bool]?"))
-            XCTAssertTrue(base.contains("public let monkey: TSTMonkeyModel?"))
-            XCTAssertTrue(base.contains("public let bananas: [TSTBananaModel]?"))
+            XCTAssertTrue(base.contains("public var aString: String?"))
+            XCTAssertTrue(base.contains("public var aDouble: Double?"))
+            XCTAssertTrue(base.contains("public var anInt: Int?"))
+            XCTAssertTrue(base.contains("public var aBool: Bool?"))
+            XCTAssertTrue(base.contains("public var aStringArray: [String]?"))
+            XCTAssertTrue(base.contains("public var aDoubleArray: [Double]?"))
+            XCTAssertTrue(base.contains("public var anIntArray: [Int]?"))
+            XCTAssertTrue(base.contains("public var aBoolArray: [Bool]?"))
+            XCTAssertTrue(base.contains("public var monkey: TSTMonkeyModel?"))
+            XCTAssertTrue(base.contains("public var bananas: [TSTBananaModel]?"))
         } catch {
             XCTFail("No base file found")
         }
         do {
             let monkey = try String(contentsOfFile: "/tmp/TSTMonkeyModel.swift")
-            XCTAssertTrue(monkey.contains("public let thing: String?"))
+            XCTAssertTrue(monkey.contains("public var thing: String?"))
         } catch {
             XCTFail("No monkey found")
         }
         do {
             let bananas = try String(contentsOfFile: "/tmp/TSTBananasModel.swift")
-            XCTAssertTrue(bananas.contains("public let thing: String?"))
-            XCTAssertTrue(bananas.contains("public let anotherThing: Int?"))
+            XCTAssertTrue(bananas.contains("public var thing: String?"))
+            XCTAssertTrue(bananas.contains("public var anotherThing: Int?"))
         } catch {
             XCTFail("No bananas found")
         }
@@ -457,7 +457,7 @@ class ClassGeneratorTests: XCTestCase {
         
         do {
             let base = try String(contentsOfFile: "/tmp/BAMBasePayload.swift")
-            XCTAssertTrue(base.contains("public let aString: String?"))
+            XCTAssertTrue(base.contains("public var aString: String?"))
         } catch {
             XCTFail("No base file found")
         }
