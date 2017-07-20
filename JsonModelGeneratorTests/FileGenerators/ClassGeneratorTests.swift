@@ -167,6 +167,10 @@ class ClassGeneratorTests: XCTestCase {
             "        self.thing = thing\n" +
             "    }\n" +
             "\n" +
+            "}\n" +
+            "\n" +
+            "extension TestModel {\n" +
+            "\n" +
             "    public init?(dictionary: [String: Any?]?) {\n" +
             "\n" +
             "        self.thing = dictionary?[\"thing\"] as? String\n" +
@@ -219,6 +223,10 @@ class ClassGeneratorTests: XCTestCase {
             "                ) {\n" +
             "        self.theThing = theThing\n" +
             "    }\n" +
+            "\n" +
+            "}\n" +
+            "\n" +
+            "extension TestModel {\n" +
             "\n" +
             "    public init?(dictionary: [String: Any?]?) {\n" +
             "\n" +

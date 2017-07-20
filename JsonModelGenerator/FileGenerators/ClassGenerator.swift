@@ -69,6 +69,10 @@ class ClassGenerator: FileGenerator {
         return initMethod
     }
     
+    func createExtensionDeclaration(className: String) -> String {
+        return "\nextension \(className) {\n\n"
+    }
+    
     func createJsonDictionaryDefinition(properties:[ObjectProperty]) -> String {
         var output = "    public var jsonDictionary: [String:Any?] {\n"
         output += "\n"
@@ -98,6 +102,8 @@ class ClassGenerator: FileGenerator {
             createClassDeclaration(className: className) +
             createPropertyList(properties: properties) +
             createInitWithPropertyArgs(properties: properties) +
+            createFooter() +
+            createExtensionDeclaration(className: className) +
             createInitWithDictionaryMethod(properties: properties) +
             createJsonDictionaryDefinition(properties: properties) +
             createFooter()
